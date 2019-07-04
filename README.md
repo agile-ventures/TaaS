@@ -11,7 +11,7 @@ Azure Function getting the updates from Pusher and sending the updates to Signal
 Simple Model for the updates. This will be extended heavily based on the different subscriptions.
 
  - [AgileVentures.TezPusher.Pusher](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.Pusher "AgileVentures.TezPusher.Pusher")
-Small Console Applications in .NET Core used to monitor Tezos Node and push updates to the Azure Function.
+Small Console Applications in .NET Core used to monitor Tezos Node and push updates to the Azure Function. This project will be updated to include Docker support.
 
  - [AgileVentures.TezPusher.SampleClient](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.SampleClient "AgileVentures.TezPusher.SampleClient")
  Sample Client application written in Angular consuming the updates provided by the SignalR hub.   
