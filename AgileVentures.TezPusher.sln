@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29006.145
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgileVentures.TezPusher.Function", "AgileVentures.TezPusher.Function\AgileVentures.TezPusher.Function.csproj", "{A6ACC83D-D5DE-47AE-8D4C-845AA2A7D4D3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgileVentures.TezPusher.Pusher", "AgileVentures.TezPusher.Pusher\AgileVentures.TezPusher.Pusher.csproj", "{E3DF8B6C-34BB-4756-B8C7-53970F9F46A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgileVentures.TezPusher.Model", "AgileVentures.TezPusher.Model\AgileVentures.TezPusher.Model.csproj", "{413F8EAE-FE75-44BE-A5BD-45FB51443644}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A6ACC83D-D5DE-47AE-8D4C-845AA2A7D4D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6ACC83D-D5DE-47AE-8D4C-845AA2A7D4D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6ACC83D-D5DE-47AE-8D4C-845AA2A7D4D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6ACC83D-D5DE-47AE-8D4C-845AA2A7D4D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3DF8B6C-34BB-4756-B8C7-53970F9F46A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3DF8B6C-34BB-4756-B8C7-53970F9F46A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3DF8B6C-34BB-4756-B8C7-53970F9F46A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3DF8B6C-34BB-4756-B8C7-53970F9F46A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{413F8EAE-FE75-44BE-A5BD-45FB51443644}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{413F8EAE-FE75-44BE-A5BD-45FB51443644}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{413F8EAE-FE75-44BE-A5BD-45FB51443644}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{413F8EAE-FE75-44BE-A5BD-45FB51443644}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0D731480-2B0B-4997-976A-B0DCD9C22F92}
+	EndGlobalSection
+EndGlobal

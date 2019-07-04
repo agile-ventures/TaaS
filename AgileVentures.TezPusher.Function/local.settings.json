@@ -1,0 +1,12 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "AzureWebJobsDashboard": "UseDevelopmentStorage=true",
+    "AzureSignalRConnectionString": "Endpoint=https://taas.service.signalr.net;AccessKey=C1LpyHMwykH57AfnYyH28DhsWn7O2FAb+W7kLLtlMk8=;Version=1.0;"
+  },
+  "Host": {
+    "LocalHttpPort": 7071,
+    "CORS": "*"
+  }
+}
