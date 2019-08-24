@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HubConnection } from '@aspnet/signalr';
 import * as signalR from '@aspnet/signalr';
 import { Observable } from 'rxjs';
 import { SignalRConnectionInfo } from './signalr-connection-info.model';
-import { map } from 'rxjs/operators';
+import * as uuidv4 from 'uuid/v4';
 import { Subject } from 'rxjs';
+
+export interface PushMessage {
+    block_header: Block;
+    transaction: Transaction;
+}
 
 export interface Block {
     level: number;
@@ -20,21 +25,64 @@ export interface Block {
     protocol_data: string;
 }
 
+export interface Transaction {
+    operation_hash: string;
+    block_hash: string;
+    block_level: number;
+    timestamp: Date;
+    transaction_content: TransactionContent;
+}
+
+export interface TransactionContent {
+    source: string;
+    destination: string;
+    amount: string;
+    fee: string;
+    counter: string;
+    gas_limit: string;
+    storage_limit: string;
+}
+
+export interface Subscription {
+    userId: string;
+    transactionAddresses: string[];
+}
+
 @Injectable()
 export class SignalRService {
 
     private readonly _http: HttpClient;
-    private readonly _baseUrl: string = 'TODO';
+    private readonly _baseUrl: string = 'https://taas-staging.agile-ventures.com/api/';
+    // private readonly _baseUrl: string = 'https://taas.agile-ventures.com/api/';
+    // private readonly _baseUrl: string = 'http://localhost:7071/api/';
     private hubConnection: HubConnection;
-    messages: Subject<Block> = new Subject();
+    blocks: Subject<Block> = new Subject();
+    transactions: Subject<any> = new Subject();
+    userId: string;
 
     constructor(http: HttpClient) {
         this._http = http;
+        this.userId = uuidv4();
     }
 
     private getConnectionInfo(): Observable<SignalRConnectionInfo> {
         const requestUrl = `${this._baseUrl}negotiate`;
-        return this._http.get<SignalRConnectionInfo>(requestUrl);
+        return this._http.get<SignalRConnectionInfo>(requestUrl,
+            {
+                headers: {
+                    'x-ms-signalr-userid': this.userId
+                }
+            });
+    }
+
+    private subscribeToTransactions(model: Subscription): Observable<any> {
+        const requestUrl = `${this._baseUrl}subscribe`;
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+            })
+        };
+        return this._http.post(requestUrl, model, httpOptions);
     }
 
     init() {
@@ -45,6 +93,12 @@ export class SignalRService {
                 accessTokenFactory: () => info.accessToken
             };
 
+            console.log(`subscribing to all transactions`);
+            this.subscribeToTransactions({ userId: this.userId, transactionAddresses: ['all'] })
+                .subscribe(() => {
+                    console.log(`subscribed to all transactions`);
+                });
+
             this.hubConnection = new signalR.HubConnectionBuilder()
                 .withUrl(info.url, options)
                 .configureLogging(signalR.LogLevel.Information)
@@ -52,9 +106,12 @@ export class SignalRService {
 
             this.hubConnection.start().catch(err => console.error(err.toString()));
 
-            this.hubConnection.on('blocks', (data: any) => {
-                console.log(data);
-                this.messages.next(data);
+            this.hubConnection.on('block_headers', (data: PushMessage) => {
+                this.blocks.next(data.block_header);
+            });
+
+            this.hubConnection.on('transactions', (data: PushMessage) => {
+                this.transactions.next(data.transaction);
             });
         });
     }

@@ -1,32 +1,28 @@
-# TaaS - Tezos as a Service
-# Client Sample 
 
-## Configuration
+# TaaS (Tezos as a Service) [STAGING]
+TaaS provides real-time updates to various applications from the Tezos Blockchain by leveraging SignalR. 
 
-Enter the SignalR Hub Url in the `signalr.service.ts` file in the `_baseUrl` variable.    
+Solution consists of several projects described bellow
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.3.
+ - [AgileVentures.TezPusher.Function](https://github.com/agile-ventures/TaaS/tree/staging/AgileVentures.TezPusher.Function "AgileVentures.TezPusher.Function")
+Azure Function getting the updates from Pusher and sending the updates to SignalR hub.
 
-## Development server
+ - [AgileVentures.TezPusher.Model](https://github.com/agile-ventures/TaaS/tree/staging/AgileVentures.TezPusher.Model "AgileVentures.TezPusher.Model")
+Simple Model for the updates. This will be extended heavily based on the different subscriptions.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+ - [AgileVentures.TezPusher.Pusher](https://github.com/agile-ventures/TaaS/tree/staging/AgileVentures.TezPusher.Pusher "AgileVentures.TezPusher.Pusher")
+Small Console Applications in .NET Core used to monitor Tezos Node and push updates to the Azure Function.
 
-## Code scaffolding
+ - [AgileVentures.TezPusher.SampleClient](https://github.com/agile-ventures/TaaS/tree/staging/AgileVentures.TezPusher.SampleClient "AgileVentures.TezPusher.SampleClient")
+ Sample Client application written in Angular consuming the updates provided by the SignalR hub.   
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Sample Client Application
+Deployed at [https://client-staging.tezoslive.io/](https://client-staging.tezoslive.io/)
 
-## Build
+## How to use
+You will need to provide a [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier) to identify a client during the initial call to `negotiate` endpoint. In the sample client application we are using the [npm uuid package](https://www.npmjs.com/package/uuid) to generate random UUIDs. 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+You can see how the subscription to all transactions is being made by looking at the `signalr.service.ts`. 
 
-## Running unit tests
+You can also subscribe only to a subset of addresses, that you are interested in by providing them as a parameter to `subscribe` call. You need to provide the generated UUID that you used in the `negotiate` call along with the array of the addresses.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

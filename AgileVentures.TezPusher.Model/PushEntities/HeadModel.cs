@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AgileVentures.TezPusher.Model
+namespace AgileVentures.TezPusher.Model.PushEntities
 {
     public class HeadModel
     {

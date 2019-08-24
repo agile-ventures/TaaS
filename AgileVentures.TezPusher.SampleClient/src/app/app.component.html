@@ -1,7 +1,8 @@
 <mat-card>
-    <h1>Tezos as a Service - Client Side Example</h1>
+    <h1>Tezos as a Service [STAGING] - Client Side Example</h1>
     <p>
-        This application is using websocket connection available from TAAS (Tezos as a Service).<br /> SignalR (WebSocket) Connection is available at https://taas.agile-ventures.com/api/api/negotiate and https://taas.agile-ventures.com/api/blocks
+        This application is using websocket connection available from TAAS (Tezos as a Service).<br /> SignalR (WebSocket) Connection is available at https://taas-staging.agile-ventures.com/api/negotiate. <br /> You can see the sample subscribing to all
+        transactions in a signalr.service.ts file.
     </p>
     <p>
         We will offer more subscriptions for real-time push updates based on the address, minimum transacted amount, etc.
@@ -10,43 +11,96 @@
 
 <mat-divider></mat-divider>
 
-<table mat-table [dataSource]="blocks" class="mat-elevation-z8" style="width:100%">
+<mat-tab-group>
+    <mat-tab label="Blocks">
+        <table mat-table #tableBlocks [dataSource]="blocks" class="mat-elevation-z8" style="width:100%">
 
-    <!--- Note that these columns can be defined in any order.
-              The actual rendered columns are set as a property on the row definition" -->
+            <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
 
-    <!-- Position Column -->
-    <ng-container matColumnDef="level">
-        <th mat-header-cell *matHeaderCellDef> Level </th>
-        <td mat-cell *matCellDef="let element"> {{element.level}} </td>
-    </ng-container>
+            <!-- Position Column -->
+            <ng-container matColumnDef="level">
+                <th mat-header-cell *matHeaderCellDef> Level </th>
+                <td mat-cell *matCellDef="let element"> {{element.level}} </td>
+            </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="hash">
-        <th mat-header-cell *matHeaderCellDef> Hash </th>
-        <td mat-cell *matCellDef="let element"> {{element.hash}} </td>
-    </ng-container>
+            <!-- Name Column -->
+            <ng-container matColumnDef="hash">
+                <th mat-header-cell *matHeaderCellDef> Hash </th>
+                <td mat-cell *matCellDef="let element"> {{element.hash}} </td>
+            </ng-container>
 
-    <!-- Weight Column -->
-    <ng-container matColumnDef="timestamp">
-        <th mat-header-cell *matHeaderCellDef> Timestamp </th>
-        <td mat-cell *matCellDef="let element"> {{element.timestamp | date:'medium'}} </td>
-    </ng-container>
+            <!-- Weight Column -->
+            <ng-container matColumnDef="timestamp">
+                <th mat-header-cell *matHeaderCellDef> Timestamp </th>
+                <td mat-cell *matCellDef="let element"> {{element.timestamp | date:'medium'}} </td>
+            </ng-container>
 
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="validation_pass">
-        <th mat-header-cell *matHeaderCellDef> Validation Pass </th>
-        <td mat-cell *matCellDef="let element"> {{element.validation_pass}} </td>
-    </ng-container>
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="validation_pass">
+                <th mat-header-cell *matHeaderCellDef> Validation Pass </th>
+                <td mat-cell *matCellDef="let element"> {{element.validation_pass}} </td>
+            </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-<!-- <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[10, 25, 50, 100]">></mat-paginator> -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsTableBlocks"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsTableBlocks;"></tr>
+        </table>
+        <!-- <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[10, 25, 50, 100]">></mat-paginator> -->
 
-<div *ngIf="!blocks || blocks.length === 0">
-    <mat-card>
-        <p>Waiting for the new block on Tezos mainnet ...</p>
-        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-    </mat-card>
-</div>
+        <div *ngIf="!blocks || blocks.length === 0">
+            <mat-card>
+                <p>Waiting for the new block on Tezos mainnet ...</p>
+                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </mat-card>
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Transactions">
+        <table mat-table #tableTransactions [dataSource]="transactions" class="mat-elevation-z8" style="width:100%">
+
+            <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="source">
+                <th mat-header-cell *matHeaderCellDef> Source </th>
+                <td mat-cell *matCellDef="let element"> {{element.transaction_content.source}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="destination">
+                <th mat-header-cell *matHeaderCellDef> Destination </th>
+                <td mat-cell *matCellDef="let element"> {{element.transaction_content.destination}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="amount">
+                <th mat-header-cell *matHeaderCellDef> Amount </th>
+                <td mat-cell *matCellDef="let element"> {{element.transaction_content.amount}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="timestamp">
+                <th mat-header-cell *matHeaderCellDef> Timestamp </th>
+                <td mat-cell *matCellDef="let element"> {{element.timestamp | date:'medium'}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="level">
+                <th mat-header-cell *matHeaderCellDef> Block Level </th>
+                <td mat-cell *matCellDef="let element"> {{element.block_level}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsTableTransaction"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsTableTransaction;"></tr>
+        </table>
+        <!-- <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[10, 25, 50, 100]">></mat-paginator> -->
+
+        <div *ngIf="!transactions || transactions.length === 0">
+            <mat-card>
+                <p>Waiting for the new transactions on Tezos mainnet ...</p>
+                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </mat-card>
+        </div>
+    </mat-tab>
+</mat-tab-group>

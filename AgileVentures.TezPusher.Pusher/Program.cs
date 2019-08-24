@@ -6,11 +6,12 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using AgileVentures.TezPusher.Model;
+using AgileVentures.TezPusher.Model.PushEntities;
 using Newtonsoft.Json;
 using NLog;
 using NLog.Config;
 
-namespace AgileVentures.Tezos.Pusher
+namespace AgileVentures.TezPusher.Pusher
 {
     class Program
     {
@@ -21,6 +22,13 @@ namespace AgileVentures.Tezos.Pusher
         });
 
         private static Logger Log;
+        private static readonly string TezosNodeUrl = ConfigurationManager.AppSettings.Get("TezosNodeRpcEndpoint");
+        private static readonly string AzureFunctionUrl = ConfigurationManager.AppSettings.Get("AzureFunctionEndpoint");
+
+        private static readonly string TezosMonitorUrl = $"{TezosNodeUrl}/monitor/heads/main";
+        private static readonly string MessageUrl = $"{AzureFunctionUrl}/api/message";
+        private static readonly string TransactionUrl = $"{AzureFunctionUrl}/api/transactions";
+        
 
         static async Task Main(string[] args)
         {
@@ -29,15 +37,13 @@ namespace AgileVentures.Tezos.Pusher
 
             Log.Info("Starting Tezos Pusher");
             
-            var nodeUrl = $"{ConfigurationManager.AppSettings.Get("TezosNodeRpcEndpoint")}/monitor/heads/main";
-            var postUrl = $"{ConfigurationManager.AppSettings.Get("AzureFunctionEndpoint")}/api/message";
             do
             {
                 while (!Console.KeyAvailable)
                 {
                     try
                     {
-                        await GetChainHead(nodeUrl, postUrl);
+                        await MonitorChainHead();
                     }
                     catch (Exception e)
                     {
@@ -51,10 +57,10 @@ namespace AgileVentures.Tezos.Pusher
             Console.ReadKey();
         }
 
-        private static async Task GetChainHead(string url, string postUrl)
+        private static async Task MonitorChainHead()
         {
             Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            var request = new HttpRequestMessage(HttpMethod.Get, url);
+            var request = new HttpRequestMessage(HttpMethod.Get, TezosMonitorUrl);
             var result = await Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, CancellationToken.None);
             var stream = await result.Content.ReadAsStreamAsync();
             var sr = new StreamReader(stream);
@@ -64,19 +70,26 @@ namespace AgileVentures.Tezos.Pusher
             {
                 try
                 {
-                    await Client.PostAsync(postUrl, new StringContent(line));
+                    //await Client.PostAsync(postUrl, new StringContent(line));
                     var head = JsonConvert.DeserializeObject<HeadModel>(line);
                     
-                    Log.Info($"Block {head.level} sent to SignalR.");
+                    var blockString = await Client.GetStringAsync(GetBlockUrl(head.hash));
+                    
+                    await Client.PostAsync(MessageUrl, new StringContent(line));
+                    await Client.PostAsync(TransactionUrl, new StringContent(blockString)); 
+
+                    Log.Info($"[STAGING] - Block {head.level} has been sent for processing.");
                     Log.Trace(line);
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex, $"Failed to deserialize json object.");
+                    Log.Error(ex, $"Failed to send the block for processing.");
                 }
-
-                
             }
+        }
+
+        private static string GetBlockUrl(string hash) {
+            return $"{TezosNodeUrl}{string.Format("/chains/main/blocks/{0}", hash)}";
         }
     }
 }

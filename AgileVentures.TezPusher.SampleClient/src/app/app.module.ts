@@ -13,7 +13,8 @@ import {
   MatPaginatorModule,
   MatCardModule,
   MatDividerModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatTabsModule
 } from '@angular/material';
 
 @NgModule({
@@ -32,7 +33,8 @@ import {
     MatPaginatorModule,
     MatCardModule,
     MatDividerModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatTabsModule
   ],
   providers: [
     SignalRService

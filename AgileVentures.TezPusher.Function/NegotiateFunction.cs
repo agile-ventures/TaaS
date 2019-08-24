@@ -10,11 +10,11 @@ namespace AgileVentures.TezPusher.Function
     public static class NegotiateFunction
     {
         [FunctionName("negotiate")]
-        public static SignalRConnectionInfo Run([HttpTrigger(AuthorizationLevel.Anonymous, "get")]HttpRequest req, 
-                                        [SignalRConnectionInfo(HubName = "broadcast")]SignalRConnectionInfo connectionInfo, 
-                                        Microsoft.Extensions.Logging.ILogger log)
+        public static SignalRConnectionInfo Run([HttpTrigger(AuthorizationLevel.Anonymous, "get")]HttpRequest req,
+            [SignalRConnectionInfo(HubName = "broadcast", UserId = "{headers.x-ms-signalr-userid}")] SignalRConnectionInfo connectionInfo,
+            Microsoft.Extensions.Logging.ILogger log)
         {
             return connectionInfo;
         }
-    }
+}
 }

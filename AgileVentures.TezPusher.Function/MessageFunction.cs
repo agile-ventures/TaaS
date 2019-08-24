@@ -7,6 +7,7 @@ using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Azure.WebJobs.Extensions.SignalRService;
 using System.Threading.Tasks;
 using AgileVentures.TezPusher.Model;
+using AgileVentures.TezPusher.Model.PushEntities;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
@@ -15,7 +16,7 @@ namespace AgileVentures.TezPusher.Function
     public static class MessageFunction
     {
         [FunctionName("message")]
-        public static async Task Run(
+        public static async Task BlockHeads(
                                     [HttpTrigger(AuthorizationLevel.Anonymous, "post")]HttpRequest req,
                                     [SignalR(HubName = "broadcast")]IAsyncCollector<SignalRMessage> signalRMessages,
                                     Microsoft.Extensions.Logging.ILogger log)
@@ -31,17 +32,17 @@ namespace AgileVentures.TezPusher.Function
                 }
                 log.LogInformation($"Message with payload {requestBody}");
 
-                var model = JsonConvert.DeserializeObject<HeadModel>(requestBody);
+                var blockHeader = JsonConvert.DeserializeObject<HeadModel>(requestBody);
 
                 await signalRMessages.AddAsync(new SignalRMessage
                 {
-                    Target = "blocks",
-                    Arguments = new object[] { model }
+                    Target = "block_headers",
+                    Arguments = new object[] { new PushMessage(blockHeader) },
                 });
             }
             catch (Exception e)
             {
-                log.LogError(e, "Error during running message function");
+                log.LogError(e, "Error during message function");
             }
         }
     }
