@@ -20,7 +20,7 @@ Small Console Applications in .NET Core used to monitor Tezos Node and push upda
 Deployed at [https://client-staging.tezoslive.io/](https://client-staging.tezoslive.io/)
 
 ## How to use
-You will need to provide a [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier) to identify a client during the initial call to `negotiate` endpoint. In the sample client application we are using the [npm uuid package](https://www.npmjs.com/package/uuid) to generate random UUIDs. 
+You will need to provide a [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier) in a custom HTTP header named `x-ms-signalr-userid` to identify a client during the initial call to `negotiate` endpoint. In the sample client application we are using the [npm uuid package](https://www.npmjs.com/package/uuid) to generate random UUIDs. 
 
 You can see how the subscription to all transactions is being made by looking at the `signalr.service.ts` [here](https://github.com/agile-ventures/TaaS/blob/master/AgileVentures.TezPusher.SampleClient/src/app/signalr.service.ts). 
 
