@@ -22,7 +22,7 @@ Deployed at [https://client-staging.tezoslive.io/](https://client-staging.tezosl
 ## How to use
 You will need to provide a [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier) to identify a client during the initial call to `negotiate` endpoint. In the sample client application we are using the [npm uuid package](https://www.npmjs.com/package/uuid) to generate random UUIDs. 
 
-You can see how the subscription to all transactions is being made by looking at the `signalr.service.ts`. 
+You can see how the subscription to all transactions is being made by looking at the `signalr.service.ts` [here](https://github.com/agile-ventures/TaaS/blob/master/AgileVentures.TezPusher.SampleClient/src/app/signalr.service.ts). 
 
 You can also subscribe only to a subset of addresses, that you are interested in by providing them as a parameter to `subscribe` call. You need to provide the generated UUID that you used in the `negotiate` call along with the array of the addresses.
 
