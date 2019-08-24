@@ -11,7 +11,7 @@ namespace AgileVentures.TezPusher.Function
     {
         [FunctionName("negotiate")]
         public static SignalRConnectionInfo Run([HttpTrigger(AuthorizationLevel.Anonymous, "get")]HttpRequest req,
-            [SignalRConnectionInfo(HubName = "broadcast", UserId = "{headers.x-ms-signalr-userid}")] SignalRConnectionInfo connectionInfo,
+            [SignalRConnectionInfo(HubName = "broadcast", UserId = "{headers.x-tezos-live-userid}")] SignalRConnectionInfo connectionInfo,
             Microsoft.Extensions.Logging.ILogger log)
         {
             return connectionInfo;

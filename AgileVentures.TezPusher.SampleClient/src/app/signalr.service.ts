@@ -70,7 +70,7 @@ export class SignalRService {
         return this._http.get<SignalRConnectionInfo>(requestUrl,
             {
                 headers: {
-                    'x-ms-signalr-userid': this.userId
+                    'x-tezos-live-userid': this.userId
                 }
             });
     }
