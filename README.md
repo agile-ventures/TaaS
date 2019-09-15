@@ -13,23 +13,23 @@ TaaS provides real-time updates to various applications from the Tezos Blockchai
 
 Solution consists of several projects described bellow
 
- - [AgileVentures.TezPusher.Function](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.Function "AgileVentures.TezPusher.Function")
+ - [AgileVentures.TezPusher.Function](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.Function)
 Azure Function getting the updates from Pusher.ConsoleApp and sending the updates to SignalR hub.
 
- - [AgileVentures.TezPusher.Model](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.Model "AgileVentures.TezPusher.Model")
+ - [AgileVentures.TezPusher.Model](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.Model)
 Simple Model for the updates. This will be extended heavily based on the different subscriptions.
 
- - [AgileVentures.TezPusher.Pusher.ConsoleApp](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.Pusher.ConsoleApp "AgileVentures.TezPusher.Pusher.ConsoleApp")
+ - [AgileVentures.TezPusher.Pusher.ConsoleApp](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.Pusher.ConsoleApp)
 Small Console Application in .NET Core used to monitor Tezos Node and push updates to the Azure Function. 
 
- - [AgileVentures.TezPusher.Pusher.Web](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.Pusher.Web"AgileVentures.TezPusher.Pusher.Web")
+ - [AgileVentures.TezPusher.Pusher.Web](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.Pusher.Web)
 ASP.NET Core Application, that monitors Tezos Node and also provides updates to clients through SignalR hub over WebSocket transport. **Docker supported!** 
 To try-out docker version you can also get it from  Docker Hub here [https://hub.docker.com/r/tezoslive/agileventurestezpusherweb](https://hub.docker.com/r/tezoslive/agileventurestezpusherweb).  See instructions for Option #1.
 
- - [AgileVentures.TezPusher.SampleClient](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.SampleClient "AgileVentures.TezPusher.SampleClient")
+ - [AgileVentures.TezPusher.SampleClient](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.SampleClient)
  Sample Client application written in Angular consuming the updates provided by the Azure SignalR hub.   
  
- - [AgileVentures.TezPusher.SampleClient.HostedWeb](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.SampleClient.HostedWeb "AgileVentures.TezPusher.SampleClient.HostedWeb")
+ - [AgileVentures.TezPusher.SampleClient.HostedWeb](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.SampleClient.HostedWeb)
  Sample Client application written in Angular consuming the updates provided by the  ASP.NET Core SignalR hub. 
 
 ## Sample Client Application Available
@@ -85,7 +85,7 @@ Note: `transactionAddresses` is a `string[]`. Specifying `'all'` will subscribe 
 ```typescript
 this.hubConnection.send("subscribe", { transactionAddresses: ['all'] });
 ```
-For reference please take a look at [AgileVentures.TezPusher.SampleClient.HostedWeb](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.SampleClient.HostedWeb"AgileVentures.TezPusher.SampleClient.HostedWeb").
+For reference please take a look at [AgileVentures.TezPusher.SampleClient.HostedWeb](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.SampleClient.HostedWeb).
 
 You can see how the subscription to all transactions is being made by looking at the `signalr.service.ts` [here](https://github.com/agile-ventures/TaaS/blob/master/AgileVentures.TezPusher.SampleClient.HostedWeb/src/app/signalr.service.ts). 
 
@@ -101,10 +101,6 @@ You can see how the subscription to all transactions is being made by looking at
 You can also subscribe only to a subset of addresses, that you are interested in by providing them as a parameter to `subscribe` call. 
 You need to provide the generated UUID that you used in the `negotiate` call along with the array of the addresses.
 
-For reference please take a look at  [AgileVentures.TezPusher.SampleClient](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.SampleClient"AgileVentures.TezPusher.SampleClient").
+For reference please take a look at  [AgileVentures.TezPusher.SampleClient](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.SampleClient).
 
 Or you can check out deployed version of this app available here [https://client-staging.tezoslive.io/](https://client-staging.tezoslive.io/).
-
-
-
-
