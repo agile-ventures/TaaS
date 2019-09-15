@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.29006.145
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgileVentures.TezPusher.Function", "AgileVentures.TezPusher.Function\AgileVentures.TezPusher.Function.csproj", "{A6ACC83D-D5DE-47AE-8D4C-845AA2A7D4D3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgileVentures.TezPusher.Pusher", "AgileVentures.TezPusher.Pusher\AgileVentures.TezPusher.Pusher.csproj", "{E3DF8B6C-34BB-4756-B8C7-53970F9F46A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgileVentures.TezPusher.Model", "AgileVentures.TezPusher.Model\AgileVentures.TezPusher.Model.csproj", "{413F8EAE-FE75-44BE-A5BD-45FB51443644}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgileVentures.TezPusher.Model", "AgileVentures.TezPusher.Model\AgileVentures.TezPusher.Model.csproj", "{413F8EAE-FE75-44BE-A5BD-45FB51443644}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgileVentures.TezPusher.Pusher.ConsoleApp", "AgileVentures.TezPusher.Pusher.ConsoleApp\AgileVentures.TezPusher.Pusher.ConsoleApp.csproj", "{03B22206-AD4B-4C41-ADB4-74E300F8FC58}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgileVentures.TezPusher.Pusher.Web", "AgileVentures.TezPusher.Pusher.Web\AgileVentures.TezPusher.Pusher.Web.csproj", "{1E03780E-3D9B-4618-850F-A51661EC5DA1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +21,18 @@ Global
 		{A6ACC83D-D5DE-47AE-8D4C-845AA2A7D4D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6ACC83D-D5DE-47AE-8D4C-845AA2A7D4D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6ACC83D-D5DE-47AE-8D4C-845AA2A7D4D3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E3DF8B6C-34BB-4756-B8C7-53970F9F46A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E3DF8B6C-34BB-4756-B8C7-53970F9F46A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E3DF8B6C-34BB-4756-B8C7-53970F9F46A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E3DF8B6C-34BB-4756-B8C7-53970F9F46A0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{413F8EAE-FE75-44BE-A5BD-45FB51443644}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{413F8EAE-FE75-44BE-A5BD-45FB51443644}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{413F8EAE-FE75-44BE-A5BD-45FB51443644}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{413F8EAE-FE75-44BE-A5BD-45FB51443644}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03B22206-AD4B-4C41-ADB4-74E300F8FC58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03B22206-AD4B-4C41-ADB4-74E300F8FC58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03B22206-AD4B-4C41-ADB4-74E300F8FC58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03B22206-AD4B-4C41-ADB4-74E300F8FC58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E03780E-3D9B-4618-850F-A51661EC5DA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E03780E-3D9B-4618-850F-A51661EC5DA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E03780E-3D9B-4618-850F-A51661EC5DA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E03780E-3D9B-4618-850F-A51661EC5DA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
