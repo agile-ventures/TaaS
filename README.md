@@ -26,8 +26,8 @@ ASP.NET Core Application, that monitors Tezos Node and also provides updates to 
  Sample Client application written in Angular consuming the updates provided by the  ASP.NET Core SignalR hub. 
 
 ### Sample Client Application
-- For Options [#1](https://github.com/agile-ventures/TaaS/blob/master/README.md#option-1---running-pusherweb-in-docker-most-convenient-at-the-moment) & [#2](https://github.com/agile-ventures/TaaS/blob/master/README.md#option-2---running-pusherweb-as-a-standalone-aspnet-core-app) - TODO
-- For Options [#3](https://github.com/agile-ventures/TaaS/blob/master/README.md#option-3---using-azure-functions-and-tezpusherconsoleapp) & [#4](https://github.com/agile-ventures/TaaS/blob/master/README.md#option-4---using-our-public-endpoints-work-in-progress---eta-end-of-september-2019) at [https://client-staging.tezoslive.io/](https://client-staging.tezoslive.io/)
+- For [Option #1](https://github.com/agile-ventures/TaaS/blob/master/README.md#option-1---running-pusherweb-in-docker-most-convenient-at-the-moment) & [Option #2](https://github.com/agile-ventures/TaaS/blob/master/README.md#option-2---running-pusherweb-as-a-standalone-aspnet-core-app) - TODO
+- For  [Option #3](https://github.com/agile-ventures/TaaS/blob/master/README.md#option-3---using-azure-functions-and-tezpusherconsoleapp) & [Option #4](https://github.com/agile-ventures/TaaS/blob/master/README.md#option-4---using-our-public-endpoints-work-in-progress---eta-end-of-september-2019) at [https://client-staging.tezoslive.io/](https://client-staging.tezoslive.io/)
 
 # How to use
 
