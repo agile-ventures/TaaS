@@ -1,13 +1,3 @@
-
-[core]
-	repositoryformatversion = 0
-	filemode = false
-	bare = false
-	logallrefupdates = true
-	symlinks = false
-[remote "origin"]
-
-
 # TaaS (Tezos as a Service)
 TaaS provides real-time updates to various applications from the Tezos Blockchain by leveraging SignalR. 
 
