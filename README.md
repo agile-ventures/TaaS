@@ -1,3 +1,4 @@
+
 # TaaS (Tezos as a Service)
 TaaS provides real-time updates to various applications from the Tezos Blockchain by leveraging SignalR. 
 
@@ -13,8 +14,10 @@ Simple Model for the updates. This will be extended heavily based on the differe
 Small Console Application in .NET Core used to monitor Tezos Node and push updates to the Azure Function. 
 
  - [AgileVentures.TezPusher.Pusher.Web](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.Pusher.Web)
-ASP.NET Core Application, that monitors Tezos Node and also provides updates to clients through SignalR hub over WebSocket transport. **Docker supported!** 
-To try-out docker version you can also get it from  Docker Hub here [https://hub.docker.com/r/tezoslive/agileventurestezpusherweb](https://hub.docker.com/r/tezoslive/agileventurestezpusherweb).  See instructions for Option #1.
+ASP.NET Core Application, that monitors Tezos Node and also provides updates to clients through SignalR hub over WebSocket transport. 
+
+	**Docker supported!** 
+	To try-out docker version you can also get it from  Docker Hub here [https://hub.docker.com/r/tezoslive/agileventurestezpusherweb](https://hub.docker.com/r/tezoslive/agileventurestezpusherweb).  See instructions for [Option #1](https://github.com/agile-ventures/TaaS/blob/master/README.md#option-2---running-pusherweb-as-a-standalone-aspnet-core-app).
 
  - [AgileVentures.TezPusher.SampleClient](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.SampleClient)
  Sample Client application written in Angular consuming the updates provided by the Azure SignalR hub.   
@@ -22,9 +25,9 @@ To try-out docker version you can also get it from  Docker Hub here [https://hub
  - [AgileVentures.TezPusher.SampleClient.HostedWeb](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.SampleClient.HostedWeb)
  Sample Client application written in Angular consuming the updates provided by the  ASP.NET Core SignalR hub. 
 
-## Sample Client Application Available
-- For Options #1 & #2 - TODO
-- For Options #3 & #4 at [https://client-staging.tezoslive.io/](https://client-staging.tezoslive.io/)
+### Sample Client Application
+- For Options [#1](https://github.com/agile-ventures/TaaS/blob/master/README.md#option-1---running-pusherweb-in-docker-most-convenient-at-the-moment) & [#2](https://github.com/agile-ventures/TaaS/blob/master/README.md#option-2---running-pusherweb-as-a-standalone-aspnet-core-app) - TODO
+- For Options [#3](https://github.com/agile-ventures/TaaS/blob/master/README.md#option-3---using-azure-functions-and-tezpusherconsoleapp) & [#4](https://github.com/agile-ventures/TaaS/blob/master/README.md#option-4---using-our-public-endpoints-work-in-progress---eta-end-of-september-2019) at [https://client-staging.tezoslive.io/](https://client-staging.tezoslive.io/)
 
 # How to use
 
