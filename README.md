@@ -22,7 +22,7 @@ ASP.NET Core Application, that monitors Tezos Node and also provides updates to 
  - [AgileVentures.TezPusher.SampleClient](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.SampleClient)
  Sample Client application written in Angular consuming the updates provided by the Azure SignalR hub.   
  
- - [AgileVentures.TezPusher.SampleClient.HostedWeb](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.SampleClient.HostedWeb)
+ - [AgileVentures.TezPusher.SampleClient.Web](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.SampleClient.Web)
  Sample Client application written in Angular consuming the updates provided by the  ASP.NET Core SignalR hub. 
 
 ### Sample Client Application
@@ -78,9 +78,9 @@ Note: `transactionAddresses` is a `string[]`. Specifying `'all'` will subscribe 
 ```typescript
 this.hubConnection.send("subscribe", { transactionAddresses: ['all'] });
 ```
-For reference please take a look at [AgileVentures.TezPusher.SampleClient.HostedWeb](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.SampleClient.HostedWeb).
+For reference please take a look at [AgileVentures.TezPusher.SampleClient.Web](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.SampleClient.Web).
 
-You can see how the subscription to all transactions is being made by looking at the `signalr.service.ts` [here](https://github.com/agile-ventures/TaaS/blob/master/AgileVentures.TezPusher.SampleClient.HostedWeb/src/app/signalr.service.ts). 
+You can see how the subscription to all transactions is being made by looking at the `signalr.service.ts` [here](https://github.com/agile-ventures/TaaS/blob/master/AgileVentures.TezPusher.SampleClient.Web/src/app/signalr.service.ts). 
 
 ### I am using option #3 or #4
 
