@@ -1,15 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Security.Claims;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Azure.WebJobs.Extensions.SignalRService;
 using System.Threading.Tasks;
-using System.Web.Http;
-using AgileVentures.TezPusher.Model;
 using AgileVentures.TezPusher.Model.PushEntities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

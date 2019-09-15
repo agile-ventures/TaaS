@@ -4,10 +4,8 @@ using System.Linq;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Azure.WebJobs.Extensions.SignalRService;
 using System.Threading.Tasks;
-using AgileVentures.TezPusher.Model;
 using AgileVentures.TezPusher.Model.Constants;
 using AgileVentures.TezPusher.Model.PushEntities;
 using AgileVentures.TezPusher.Model.RpcEntities;
@@ -16,7 +14,7 @@ using Newtonsoft.Json;
 
 namespace AgileVentures.TezPusher.Function
 {
-    public static class MessageExtendedFunction
+    public static class TransactionFunction
     {
         [FunctionName("transactions")]
         public static async Task Run(
@@ -35,6 +33,7 @@ namespace AgileVentures.TezPusher.Function
                 }
                 log.LogInformation($"Message with payload {requestBody}");
 
+                //var model = JsonConvert.DeserializeObject<HeadModel>(requestBody);
                 var model = JsonConvert.DeserializeObject<BlockRpcEntity>(requestBody);
                 var transactions = model.GetTransactions();
                 foreach (var transaction in transactions)
