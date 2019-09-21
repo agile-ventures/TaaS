@@ -48,9 +48,9 @@ Github account will be needed and API will be limited to
 
 For client side instructions please see [Subscribing to events from the client - Option 3 or 4](#i-am-using-option-3-or-4).
 
-### Subscribing to events from the client
+## Subscribing to events from the client
 
-#### I am using option #1 or #2
+### I am using option #1 or #2
 
 You can connect to the hub for example like this (see `signalr.service.ts`)
 ```typescript
