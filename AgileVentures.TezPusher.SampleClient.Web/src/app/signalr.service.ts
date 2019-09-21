@@ -51,7 +51,14 @@ export interface Subscription {
 export class SignalRService {
 
     private readonly _http: HttpClient;
-    private readonly _baseUrl: string = '';
+    
+    /*
+    ***
+    *** THIS NEEDS TO BE CONFIGURED PER YOUR ENVIRONMENT! ***
+    ***
+    */
+    private readonly _baseUrl: string = 'http://127.0.0.1:32769';
+    
     private hubConnection: HubConnection;
     blocks: Subject<Block> = new Subject();
     transactions: Subject<any> = new Subject();
