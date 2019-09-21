@@ -5,7 +5,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Configuration 
 
-Configure `_baseUrl` variable in https://github.com/agile-ventures/TaaS/blob/79552fdaf3df82d6b311112d6651b8e687ba5864/AgileVentures.TezPusher.SampleClient.Web/src/app/signalr.service.ts#L60 based on your environment. If you are running the Docker image it is easier to use HTTP endpoint.
+Configure `_baseUrl` variable in [src/app/signalr.service.ts#L60](https://github.com/agile-ventures/TaaS/blob/79552fdaf3df82d6b311112d6651b8e687ba5864/AgileVentures.TezPusher.SampleClient.Web/src/app/signalr.service.ts#L60) based on your environment. If you are running the Docker image it is easier to use HTTP endpoint.
 
 ## Development server
 
