@@ -4,9 +4,9 @@
 TaaS provides real-time updates to various applications from the Tezos Blockchain by leveraging SignalR. 
 
 ## Table of contents
- - How to use
- - Solution description
- - Sample client applications
+ - [How to use](#how-to-use)
+ - [Solution description](#solution-description)
+ - [Sample Client Applications](#sample-client-applications)
 
 ## How to use
 
