@@ -18,7 +18,7 @@ Small Console Application in .NET Core used to monitor Tezos Node and push updat
 ASP.NET Core Application, that monitors Tezos Node and also provides updates to clients through SignalR hub over WebSocket transport. 
 
 	**Docker supported!** 
-	To try-out docker version you can also get it from  Docker Hub here [https://hub.docker.com/r/tezoslive/agileventurestezpusherweb](https://hub.docker.com/r/tezoslive/agileventurestezpusherweb).  See instructions for [Option #1](https://docs.tezoslive.io/#option-1-running-pusher-web-in-docker-most-convenient-at-the-moment).
+	To try-out docker version you can also get it from  Docker Hub here [https://hub.docker.com/r/tezoslive/agileventurestezpusherweb](https://hub.docker.com/r/tezoslive/agileventurestezpusherweb).  See instructions for [Option #1](https://github.com/agile-ventures/TaaS/blob/master/README.md#option-1---running-pusherweb-in-docker-most-convenient-at-the-moment).
 
  - [AgileVentures.TezPusher.SampleClient](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.SampleClient)
  Sample Client application written in Angular consuming the updates provided by the Azure SignalR hub.   
