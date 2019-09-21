@@ -1,11 +1,12 @@
 
+
 # Sample Client for TaaS Web (Docker) Server App
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.3. Run `npm i -g @angular/cli` to install angular CLI globally.
 
 ## Configuration 
 
-Configure `_baseUrl` variable in [src/app/signalr.service.ts#L60](https://github.com/agile-ventures/TaaS/blob/79552fdaf3df82d6b311112d6651b8e687ba5864/AgileVentures.TezPusher.SampleClient.Web/src/app/signalr.service.ts#L60) based on your environment. If you are running the Docker image it is easier to use HTTP endpoint.
+Configure `_baseUrl` variable in [src/app/signalr.service.ts#L60](https://github.com/agile-ventures/TaaS/blob/79552fdaf3df82d6b311112d6651b8e687ba5864/AgileVentures.TezPusher.SampleClient.Web/src/app/signalr.service.ts#L60) based on your environment. If you are running the Docker image from DockerHub (https://hub.docker.com/r/tezoslive/agileventurestezpusherweb)  it is easier to use HTTP endpoint at the moment.
 
 ## Development server
 
