@@ -1,5 +1,6 @@
 
 
+
 # TaaS (Tezos as a Service)
 TaaS provides real-time updates to various applications from the Tezos Blockchain by leveraging SignalR. 
 
@@ -39,10 +40,10 @@ There is a pre-filled endpoint which is hosted on Azure Free plan, so it might b
 
 For client side instructions please see [Subscribing to events from the client - Option 3 or 4](#i-am-using-option-3-or-4).
 
-### Option #4 - Using our public endpoints (Work-in-Progress) - ETA End of September 2019
-We will soon publish an update, that will allow everyone to provision a free API endpoint. There is no need to setup or host anything. 
+### Option #4 - Using the endpoint from [TezosLive.io](https://tezoslive.io)
+Sign in using your GitHub account on [TezosLive.io](https://tezoslive.io) and request your endpoint. There is no need to setup or host anything on the server side. 
 
-Github account will be needed and API will be limited to 
+API is currently limited to 
 - 20 000 messages per account per day (1 message is counted for each 64kB in case message has more than 64kB)
 - 20 concurrent connection per account
 
@@ -112,4 +113,4 @@ ASP.NET Core Application, that monitors Tezos Node and also provides updates to 
 
 ### Sample Client Applications
 - For [Option #1](#option-1---running-pusherweb-in-docker-most-convenient-at-the-moment) & [Option #2](#option-2---running-pusherweb-as-a-standalone-aspnet-core-app) - TODO
-- For  [Option #3](#option-3---using-azure-functions-and-tezpusherconsoleapp) & [Option #4](#option-4---using-our-public-endpoints-work-in-progress---eta-end-of-september-2019) at [https://client-staging.tezoslive.io/](https://client-staging.tezoslive.io/)
+- For  [Option #3](#option-3---using-azure-functions-and-tezpusherconsoleapp) & [Option #4](#option-4---using-the-endpoint-from-tezoslive.io) at [https://client-staging.tezoslive.io/](https://client-staging.tezoslive.io/)
