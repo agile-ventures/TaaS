@@ -2,7 +2,7 @@
 
 
 # TaaS (Tezos as a Service)
-TaaS provides real-time updates to various applications from the Tezos Blockchain by leveraging SignalR. 
+TaaS provides real-time updates to client applications based on the events happening on Tezos by leveraging SignalR. 
 
 ## Table of contents
  - [How to use](#how-to-use)
