@@ -10,6 +10,7 @@ Configure `_baseUrl` variable in [src/app/signalr.service.ts#L60](https://github
 
 ## Development server
 
+Run `npm install` to install all required dependencies. 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
