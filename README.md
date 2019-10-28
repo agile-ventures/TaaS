@@ -113,4 +113,4 @@ ASP.NET Core Application, that monitors Tezos Node and also provides updates to 
 
 ### Sample Client Applications
 - For [Option #1](#option-1---running-pusherweb-in-docker-most-convenient-at-the-moment) & [Option #2](#option-2---running-pusherweb-as-a-standalone-aspnet-core-app) - TODO
-- For  [Option #3](#option-3---using-azure-functions-and-tezpusherconsoleapp) & [Option #4](#option-4---using-the-endpoint-from-tezoslive.io) at [https://client-staging.tezoslive.io/](https://client-staging.tezoslive.io/)
+- For  [Option #3](#option-3---using-azure-functions-and-tezpusherconsoleapp) & [Option #4](#option-4---using-the-endpoint-from-tezosliveio) at [https://client-staging.tezoslive.io/](https://client-staging.tezoslive.io/)
