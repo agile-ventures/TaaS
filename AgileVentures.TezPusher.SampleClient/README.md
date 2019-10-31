@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## How to create your TaaS Endpoint 
 
-To create your own TaaS endpoint please head to [TezosLive.io](https://wwww.tezoslive.io). You can also try running the sample application with our default endpoint.
+To create your own TaaS endpoint please head to [TezosLive.io](https://www.tezoslive.io). You can also try running the sample application with our default endpoint.
 
 ## How to run
 
