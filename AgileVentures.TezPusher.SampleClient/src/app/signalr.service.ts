@@ -52,9 +52,7 @@ export interface Subscription {
 export class SignalRService {
 
     private readonly _http: HttpClient;
-    private readonly _baseUrl: string = 'https://taas-staging.agile-ventures.com/api/';
-    // private readonly _baseUrl: string = 'https://taas.agile-ventures.com/api/';
-    // private readonly _baseUrl: string = 'http://localhost:7071/api/';
+    private baseUrl: string;
     private hubConnection: HubConnection;
     blocks: Subject<Block> = new Subject();
     transactions: Subject<any> = new Subject();
@@ -66,7 +64,7 @@ export class SignalRService {
     }
 
     private getConnectionInfo(): Observable<SignalRConnectionInfo> {
-        const requestUrl = `${this._baseUrl}negotiate`;
+        const requestUrl = `${this.baseUrl}negotiate`;
         return this._http.get<SignalRConnectionInfo>(requestUrl,
             {
                 headers: {
@@ -76,7 +74,7 @@ export class SignalRService {
     }
 
     private subscribeToTransactions(model: Subscription): Observable<any> {
-        const requestUrl = `${this._baseUrl}subscribe`;
+        const requestUrl = `${this.baseUrl}subscribe`;
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
@@ -85,8 +83,9 @@ export class SignalRService {
         return this._http.post(requestUrl, model, httpOptions);
     }
 
-    init() {
+    init(endpointUrl: string) {
         console.log(`initializing SignalRService...`);
+        this.baseUrl = endpointUrl;
         this.getConnectionInfo().subscribe(info => {
             console.log(`received info for endpoint ${info.url}`);
             const options = {

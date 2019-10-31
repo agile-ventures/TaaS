@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { SignalRService } from './signalr.service';
@@ -14,12 +14,17 @@ import {
   MatCardModule,
   MatDividerModule,
   MatProgressBarModule,
-  MatTabsModule
+  MatTabsModule,
+  MatDialogModule
 } from '@angular/material';
+import { ServiceUrlDialogComponent } from './serviceurl-dialog/serviceurl-dialog.component';
+import { AmountToTezPipe } from './amount-to-tez.pipe.';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ServiceUrlDialogComponent,
+    AmountToTezPipe
   ],
   imports: [
     BrowserModule,
@@ -34,11 +39,14 @@ import {
     MatCardModule,
     MatDividerModule,
     MatProgressBarModule,
-    MatTabsModule
+    MatTabsModule,
+    MatDialogModule,
+    ReactiveFormsModule
   ],
   providers: [
     SignalRService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ServiceUrlDialogComponent]
 })
 export class AppModule { }
