@@ -12,7 +12,7 @@ TaaS provides real-time updates to various applications based on the events happ
 
 ## How to use
 
-### Option \#1 - Running [Pusher.Web](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.Pusher.Web) in Docker \(most convenient at the moment\)
+### Option \#1 - Running [Pusher.Web](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.Pusher.Web) in Docker
 
 Ready-to-use docker image is available from Docker Hub here: [https://hub.docker.com/r/tezoslive/agileventurestezpusherweb](https://hub.docker.com/r/tezoslive/agileventurestezpusherweb).
 
@@ -45,7 +45,7 @@ Provide a configuration for `Function` project in the `local.settings.json` file
 
 For client side instructions please see [Subscribing to events from the client - Option 3 or 4](./#i-am-using-option-3-or-4).
 
-### Option \#4 - Using the endpoint from [TezosLive.io](https://tezoslive.io)
+### Option \#4 - Using the endpoint from [TezosLive.io](https://tezoslive.io)  \(most convenient\) 
 
 Sign in using your GitHub account on [TezosLive.io](https://tezoslive.io) and request your endpoint. There is no need to setup or host anything on the server side.
 
