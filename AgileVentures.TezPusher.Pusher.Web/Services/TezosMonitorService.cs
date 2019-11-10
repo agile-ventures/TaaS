@@ -56,14 +56,14 @@ namespace AgileVentures.TezPusher.Pusher.Web.Services
             {
                 try
                 {
-                    //await Client.PostAsync(postUrl, new StringContent(line));
-                    var head = JsonConvert.DeserializeObject<HeadModel>(line);
+                    var head = JsonConvert.DeserializeObject<MonitorHeadModel>(line);
 
                     var blockString = await _tezosMonitorClient.GetStringAsync(GetBlockUrl(head.hash));
+
                     var block = JsonConvert.DeserializeObject<BlockRpcEntity>(blockString);
 
-                    await _pushService.PushBlockHeader(head);
-                    await _pushService.PushTransactions(block);
+                    await _pushService.PushBlockHeader(new HeadModel(block));
+                    await _pushService.PushOperations(block);
 
                     _logger.LogInformation($"Block {head.level} has been sent for processing.");
                     _logger.LogTrace(line);

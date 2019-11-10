@@ -16,10 +16,13 @@ import {
   MatProgressBarModule,
   MatTabsModule
 } from '@angular/material';
+import { AmountToTezPipe, FeeToTezPipe } from './pipes';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AmountToTezPipe,
+    FeeToTezPipe
   ],
   imports: [
     BrowserModule,

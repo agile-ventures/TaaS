@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AgileVentures.TezPusher.Model.Constants;
+using AgileVentures.TezPusher.Model.Contracts;
 using AgileVentures.TezPusher.Model.Interfaces;
 using Newtonsoft.Json;
 
@@ -51,7 +52,7 @@ namespace AgileVentures.TezPusher.Model.RpcEntities
         public string change { get; set; }
         public string category { get; set; }
         public string @delegate { get; set; }
-        public int? level { get; set; }
+        public int? cycle { get; set; }
     }
 
     public class Metadata
@@ -79,30 +80,115 @@ namespace AgileVentures.TezPusher.Model.RpcEntities
         public string change { get; set; }
         public string category { get; set; }
         public string @delegate { get; set; }
-        public int? level { get; set; }
-    }
-
-    public class BlockTransactionBalanceUpdate2
-    {
-        public string kind { get; set; }
-        public string contract { get; set; }
-        public string change { get; set; }
+        public int? cycle { get; set; }
     }
 
     public class BlockTransactionOperationResult
     {
         public string status { get; set; }
-        public List<BlockTransactionBalanceUpdate2> balance_updates { get; set; }
+        public List<BlockTransactionBalanceUpdate> balance_updates { get; set; }
         public string consumed_gas { get; set; }
+        public List<string> originated_contracts { get; set; }
+        public string paid_storage_size_diff { get; set; }
+        public string storage_size { get; set; }
+    }
+
+    public class BlockTransactionInternalOperationResult
+    {
+        public string kind { get; set; }
+        public string source { get; set; }
+        public int nonce { get; set; }
+        public string amount { get; set; }
+        public string destination { get; set; }
+        public BlockTransactionOperationResult result { get; set; }
     }
 
     public class BlockTransactionMetadata
     {
         public List<BlockTransactionBalanceUpdate> balance_updates { get; set; }
         public BlockTransactionOperationResult operation_result { get; set; }
+        public List<BlockTransactionInternalOperationResult> internal_operation_results { get; set; }
     }
 
-    public class BlockTransactionContent : IRpcEntity
+    public class BlockDelegationContent : BlockOperationContent, IRpcEntity
+    {
+        public string @delegate { get; set; }
+        public BlockTransactionMetadata metadata { get; set; }
+    }
+
+    public class BlockOriginationContent : BlockOperationContent, IRpcEntity
+    {
+        public string balance { get; set; }
+        public BlockTransactionMetadata metadata { get; set; }
+    }
+
+    public class BlockTransactionContent : BlockOperationContent, IRpcEntity
+    {
+        public string amount { get; set; }
+        public string destination { get; set; }
+        public BlockTransactionMetadata metadata { get; set; }
+
+        public string GetTransactionSource()
+        {
+            return IsInternalTransaction() ? GetTransactionFromInternalOperationResult().source : source;
+        }
+
+        public string GetTransactionDestination()
+        {
+            return IsInternalTransaction() ? GetTransactionFromInternalOperationResult().destination : destination;
+        }
+
+        private bool IsInternalTransaction()
+        {
+            return amount == "0" && metadata.internal_operation_results.Any(ior =>
+                       ior.kind == TezosBlockOperationConstants.Transaction &&
+                       ior.result.status == TezosBlockOperationConstants.OperationResultStatusApplied);
+        }
+
+        private BlockTransactionInternalOperationResult GetTransactionFromInternalOperationResult()
+        {
+            return metadata.internal_operation_results.First(ior =>
+                ior.kind == TezosBlockOperationConstants.Transaction &&
+                ior.result.status == TezosBlockOperationConstants.OperationResultStatusApplied);
+        }
+
+        public BlockTransactionContent GetInternalTransactionContent()
+        {
+            if (!IsInternalTransaction()) return this;
+            var ior = GetTransactionFromInternalOperationResult();
+            var internalTxContent = new BlockTransactionContent
+            {
+                amount = ior.amount,
+                counter = counter,
+                destination = ior.destination,
+                fee = fee,
+                gas_limit = gas_limit,
+                kind = kind,
+                source = ior.source,
+                storage_limit = storage_limit,
+                metadata = new BlockTransactionMetadata
+                {
+                    balance_updates = metadata.balance_updates,
+                    operation_result = new BlockTransactionOperationResult
+                    {
+                        status = TezosBlockOperationConstants.OperationResultStatusApplied,
+                        balance_updates = ior.result.balance_updates,
+                        consumed_gas = ior.result.consumed_gas
+                    }
+                }
+            };
+            return internalTxContent;
+        }
+    }
+
+    public class BlockEndorsementContent : IRpcEntity
+    {
+        public string kind { get; set; }
+        public int level { get; set; }
+        public BlockTransactionMetadata metadata { get; set; }
+    }
+
+    public class BlockOperationContent
     {
         public string kind { get; set; }
         public string source { get; set; }
@@ -110,16 +196,6 @@ namespace AgileVentures.TezPusher.Model.RpcEntities
         public string counter { get; set; }
         public string gas_limit { get; set; }
         public string storage_limit { get; set; }
-        public string amount { get; set; }
-        public string destination { get; set; }
-        public BlockTransactionMetadata metadata { get; set; }
-    }
-
-    public class BlockEndorsementContent : IRpcEntity
-    {
-        public string kind { get; set; }
-        public int level { get; set; }
-        public BlockEndorsementMetadata metadata { get; set; }
     }
 
     public class BlockOperation<T> where T : IRpcEntity
@@ -172,7 +248,28 @@ namespace AgileVentures.TezPusher.Model.RpcEntities
         public Metadata metadata { get; set; }
     }
 
+    public class GenericBlockOperationContent : BlockOperationContent, IRpcEntity
+    {
+        public string amount { get; set; }
+        public string destination { get; set; }
+        public string balance { get; set; }
+        public string @delegate { get; set; }
+        public BlockTransactionMetadata metadata { get; set; }
+    }
+
+    public class GenericOperationsEntity : List<BlockOperation<GenericBlockOperationContent>>, IRpcEntity
+    {
+    }
+
     public class BlockTransactionsRpcEntity : List<BlockOperation<BlockTransactionContent>>, IRpcEntity
+    {
+    }
+
+    public class BlockOriginationsRpcEntity : List<BlockOperation<BlockOriginationContent>>, IRpcEntity
+    {
+    }
+
+    public class BlockDelegationsRpcEntity : List<BlockOperation<BlockDelegationContent>>, IRpcEntity
     {
     }
 
@@ -196,15 +293,43 @@ namespace AgileVentures.TezPusher.Model.RpcEntities
         public Header header { get; set; }
         public Metadata metadata { get; set; }
         //TODO strongly type! 
-        //array of arrays [endorsements,?,?,transaction||delegation||reveal||double_baking_evidence]
+        //array of arrays [endorsements,?,?,transaction||origination||delegation||reveal||double_baking_evidence]
         public BlockOperationsRpcEntity operations { get; set; }
 
-        public List<BlockOperation<BlockTransactionContent>> GetTransactions()
+        public BlockOperations GetOperations()
         {
-            var transcactionsString = JsonConvert.SerializeObject(operations[3]);
-            var transactions = JsonConvert.DeserializeObject<BlockTransactionsRpcEntity>(transcactionsString);
-            var appliedTransactions = transactions.Where(t => t.contents.Any(c => c.kind == TezosBlockOperationConstants.Transaction && c.metadata.operation_result.status == TezosBlockOperationConstants.OperationResultStatusApplied)).ToList();
-            return appliedTransactions;
+            var operationsString = JsonConvert.SerializeObject(operations[3]);
+
+            //var ops = JsonConvert.DeserializeObject<GenericOperationsEntity>(operationsString);
+
+            // TODO refactor this
+            var transactions = JsonConvert.DeserializeObject<BlockTransactionsRpcEntity>(operationsString);
+            var originations = JsonConvert.DeserializeObject<BlockOriginationsRpcEntity>(operationsString);
+            var delegations = JsonConvert.DeserializeObject<BlockDelegationsRpcEntity>(operationsString);
+
+            var appliedTransactions = transactions.Where(t => t.contents.Any(c =>
+                    c.kind == TezosBlockOperationConstants.Transaction &&
+                    c.metadata.operation_result.status == TezosBlockOperationConstants.OperationResultStatusApplied))
+                    .ToList();
+
+            var appliedOriginations = originations.Where(t => t.contents.Any(c =>
+                    c.kind == TezosBlockOperationConstants.Origination &&
+                    c.metadata.operation_result.status == TezosBlockOperationConstants.OperationResultStatusApplied))
+                .ToList();
+
+            var appliedDelegations = delegations.Where(t => t.contents.Any(c =>
+                    c.kind == TezosBlockOperationConstants.Delegation &&
+                    c.metadata.operation_result.status == TezosBlockOperationConstants.OperationResultStatusApplied))
+                .ToList();
+
+            return new BlockOperations
+            {
+                Transactions = appliedTransactions,
+                Originations = appliedOriginations,
+                Delegations = appliedDelegations
+            };
         }
     }
+
+
 }

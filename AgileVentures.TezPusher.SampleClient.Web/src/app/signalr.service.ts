@@ -9,6 +9,8 @@ import { Subject } from 'rxjs';
 export interface PushMessage {
     block_header: Block;
     transaction: Transaction;
+    origination: Origination;
+    delegation: Delegation;
 }
 
 export interface Block {
@@ -24,80 +26,123 @@ export interface Block {
     protocol_data: string;
 }
 
-export interface Transaction {
+export interface Operation {
     operation_hash: string;
     block_hash: string;
     block_level: number;
     timestamp: Date;
-    transaction_content: TransactionContent;
 }
 
-export interface TransactionContent {
+export interface OperationContent {
     source: string;
-    destination: string;
-    amount: string;
     fee: string;
     counter: string;
     gas_limit: string;
     storage_limit: string;
 }
 
+export interface Metadata {
+    operation_result: OperationResults;
+}
+
+export interface OperationResults {
+    originated_contracts: string[];
+}
+
+
+export interface Transaction extends Operation {
+    transaction_content: TransactionContent;
+}
+
+export interface Origination extends Operation {
+    origination_content: OriginationContent;
+}
+
+export interface Delegation extends Operation {
+    delegation_content: DelegationContent;
+}
+
+export interface TransactionContent extends OperationContent {
+    destination: string;
+    amount: string;
+}
+
+export interface OriginationContent extends OperationContent {
+    balance: string;
+    amount: string;
+    metadata: Metadata;
+}
+
+export interface DelegationContent extends OperationContent {
+    delegate: string;
+}
+
 export interface Subscription {
-    userId?: string;
     transactionAddresses: string[];
+    delegationAddresses: string[];
+    originationAddresses: string[];
 }
 
 @Injectable()
 export class SignalRService {
 
-    private readonly _http: HttpClient;
-    
     /*
     ***
     *** THIS NEEDS TO BE CONFIGURED PER YOUR ENVIRONMENT! ***
     ***
     */
-    private readonly _baseUrl: string = 'http://127.0.0.1:32769';
-    
+    private readonly _baseUrl: string = 'https://localhost:44333';
+
     private hubConnection: HubConnection;
     blocks: Subject<Block> = new Subject();
     transactions: Subject<any> = new Subject();
-    userId: string;
+    originations: Subject<any> = new Subject();
+    delegations: Subject<any> = new Subject();
 
-    constructor(http: HttpClient) {
-        this._http = http;
-        this.userId = uuidv4();
-    }
+    constructor() { }
 
     private subscribeToTransactions(model: Subscription): Observable<any> {
-        return from(this.hubConnection.send("subscribe", model));
+        return from(this.hubConnection.send('subscribe', model));
     }
 
     private connect(): Observable<any> {
         this.hubConnection = new signalR.HubConnectionBuilder()
-        .withUrl(`${this._baseUrl}/tezosHub`)
-        .configureLogging(signalR.LogLevel.Information)
-        .build();
+            .withUrl(`${this._baseUrl}/tezosHub`)
+            .configureLogging(signalR.LogLevel.Information)
+            .build();
 
-    return from(this.hubConnection.start());
+        return from(this.hubConnection.start());
     }
 
     init() {
         console.log(`initializing SignalRService...`);
         this.connect().subscribe(() => {
-            console.log(`subscribing to all transactions`);
-            this.subscribeToTransactions({ transactionAddresses: ['all'] })
+            console.log(`subscribing to all transactions, originations and delegations`);
+            const model = <Subscription>{
+                transactionAddresses: ['all'],
+                delegationAddresses: ['all'],
+                originationAddresses: ['all']
+            };
+            this.subscribeToTransactions(model)
                 .subscribe(() => {
-                    console.log(`subscribed to all transactions`);
+                    console.log(`subscribed to all transactions, originations and delegations`);
                 });
-    
+
             this.hubConnection.on('block_headers', (data: PushMessage) => {
                 this.blocks.next(data.block_header);
             });
-    
+
             this.hubConnection.on('transactions', (data: PushMessage) => {
                 this.transactions.next(data.transaction);
             });
-        })
+
+            this.hubConnection.on('originations', (data: PushMessage) => {
+                this.originations.next(data.origination);
+            });
+
+            this.hubConnection.on('delegations', (data: PushMessage) => {
+                this.delegations.next(data.delegation);
+            });
+        });
     }
 }

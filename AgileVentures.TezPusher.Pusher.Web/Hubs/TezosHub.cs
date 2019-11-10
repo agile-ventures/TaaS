@@ -27,6 +27,15 @@ namespace AgileVentures.TezPusher.Pusher.Web.Hubs
                 await Groups.AddToGroupAsync(Context.ConnectionId, $"transactions_{address}");
             }
 
+            foreach (var address in model.OriginationAddresses)
+            {
+                await Groups.AddToGroupAsync(Context.ConnectionId, $"originations_{address}");
+            }
+
+            foreach (var address in model.DelegationAddresses)
+            {
+                await Groups.AddToGroupAsync(Context.ConnectionId, $"delegations_{address}");
+            }
             await Clients.Caller.SendAsync("subscribed",new object[] { model });
         }
         public async Task Unsubscribe(SubscribeModel model)
@@ -40,6 +49,30 @@ namespace AgileVentures.TezPusher.Pusher.Web.Hubs
                 catch (Exception e)
                 {
                     _log.LogError(e,$"Unable to unsubscribe ConnectionId={Context.ConnectionId} from transactions_{address} group.");
+                }
+            }
+
+            foreach (var address in model.OriginationAddresses)
+            {
+                try
+                {
+                    await Groups.RemoveFromGroupAsync(Context.ConnectionId, $"originations_{address}");
+                }
+                catch (Exception e)
+                {
+                    _log.LogError(e, $"Unable to unsubscribe ConnectionId={Context.ConnectionId} from originations_{address} group.");
+                }
+            }
+
+            foreach (var address in model.DelegationAddresses)
+            {
+                try
+                {
+                    await Groups.RemoveFromGroupAsync(Context.ConnectionId, $"delegations_{address}");
+                }
+                catch (Exception e)
+                {
+                    _log.LogError(e, $"Unable to unsubscribe ConnectionId={Context.ConnectionId} from delegations_{address} group.");
                 }
             }
 

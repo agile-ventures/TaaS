@@ -23,10 +23,10 @@ namespace AgileVentures.TezPusher.Pusher.ConsoleApp
         private static Logger Log;
         private static readonly string TezosNodeUrl = ConfigurationManager.AppSettings.Get("TezosNodeRpcEndpoint");
         private static readonly string AzureFunctionUrl = ConfigurationManager.AppSettings.Get("AzureFunctionEndpoint");
+        private static readonly string AzureFunctionKey = ConfigurationManager.AppSettings.Get("AzureFunctionKey");
 
         private static readonly string TezosMonitorUrl = $"{TezosNodeUrl}/monitor/heads/main";
-        private static readonly string MessageUrl = $"{AzureFunctionUrl}/api/message";
-        private static readonly string TransactionUrl = $"{AzureFunctionUrl}/api/transactions";
+        private static readonly string MessageUrl = $"{AzureFunctionUrl}/api/message?code={AzureFunctionKey}";
 
 
         static async Task Main(string[] args)
@@ -39,11 +39,15 @@ namespace AgileVentures.TezPusher.Pusher.ConsoleApp
 
                 if (string.IsNullOrEmpty(TezosNodeUrl))
                 {
-                    throw new ArgumentException($"NodeRpcEndpoint configuration is empty. Please provide a valid URL in either .config file or if you are running in Docker in ENV variable.");
+                    throw new ArgumentException($"NodeRpcEndpoint configuration is empty. Please provide a valid URL in .config file.");
                 }
                 if (string.IsNullOrEmpty(AzureFunctionUrl))
                 {
-                    throw new ArgumentException($"AzureFunctionUrl configuration is empty. Please provide a valid URL in either .config file or if you are running in Docker in ENV variable.");
+                    throw new ArgumentException($"AzureFunctionUrl configuration is empty. Please provide a valid URL in .config file.");
+                }
+                if (string.IsNullOrEmpty(AzureFunctionKey))
+                {
+                    throw new ArgumentException($"AzureFunctionKey configuration is empty. Please provide a valid key in .config file.");
                 }
 
                 do
@@ -91,13 +95,11 @@ namespace AgileVentures.TezPusher.Pusher.ConsoleApp
             {
                 try
                 {
-                    //await Client.PostAsync(postUrl, new StringContent(line));
                     var head = JsonConvert.DeserializeObject<HeadModel>(line);
 
                     var blockString = await Client.GetStringAsync(GetBlockUrl(head.hash));
 
-                    await Client.PostAsync(MessageUrl, new StringContent(line));
-                    await Client.PostAsync(TransactionUrl, new StringContent(blockString));
+                    await Client.PostAsync(MessageUrl, new StringContent(blockString));
 
                     Log.Info($"Block {head.level} has been sent for processing.");
                     Log.Trace(line);
