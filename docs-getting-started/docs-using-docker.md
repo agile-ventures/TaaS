@@ -27,7 +27,9 @@ Change the **Tezos:NodeUrl** based on your configuration!
 {% endhint %}
 
 ```text
-docker run --rm -it -p 80:80 --env Tezos:NodeUrl="http://172.17.0.1:8732" tezoslive/agileventurestezpusherweb
+docker run --rm -it -p 80:80 \
+--env Tezos:NodeUrl="http://172.17.0.1:8732" \
+tezoslive/agileventurestezpusherweb
 ```
 
 #### Optional Configuration
