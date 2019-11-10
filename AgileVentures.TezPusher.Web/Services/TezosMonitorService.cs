@@ -5,14 +5,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using AgileVentures.TezPusher.Model.PushEntities;
 using AgileVentures.TezPusher.Model.RpcEntities;
-using AgileVentures.TezPusher.Pusher.Web.Configurations;
-using AgileVentures.TezPusher.Pusher.Web.HttpClients;
+using AgileVentures.TezPusher.Web.Configurations;
+using AgileVentures.TezPusher.Web.HttpClients;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
-namespace AgileVentures.TezPusher.Pusher.Web.Services
+namespace AgileVentures.TezPusher.Web.Services
 {
     public class TezosMonitorService : IHostedService
     {

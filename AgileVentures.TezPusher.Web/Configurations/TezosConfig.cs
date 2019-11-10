@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AgileVentures.TezPusher.Pusher.Web.Configurations
+namespace AgileVentures.TezPusher.Web.Configurations
 {
     public class TezosConfig
     {

@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Net.Http;
-using AgileVentures.TezPusher.Pusher.Web.Configurations;
-using AgileVentures.TezPusher.Pusher.Web.HttpClients;
-using AgileVentures.TezPusher.Pusher.Web.Hubs;
-using AgileVentures.TezPusher.Pusher.Web.Services;
+using AgileVentures.TezPusher.Web.Configurations;
+using AgileVentures.TezPusher.Web.HttpClients;
+using AgileVentures.TezPusher.Web.Hubs;
+using AgileVentures.TezPusher.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace AgileVentures.TezPusher.Pusher.Web
+namespace AgileVentures.TezPusher.Web
 {
     public class Startup
     {

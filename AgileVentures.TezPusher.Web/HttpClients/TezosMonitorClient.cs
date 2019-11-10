@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using AgileVentures.TezPusher.Pusher.Web.Configurations;
+using AgileVentures.TezPusher.Web.Configurations;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace AgileVentures.TezPusher.Pusher.Web.HttpClients
+namespace AgileVentures.TezPusher.Web.HttpClients
 {
     public class TezosMonitorClient
     {

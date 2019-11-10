@@ -4,11 +4,11 @@ using AgileVentures.TezPusher.Model.Constants;
 using AgileVentures.TezPusher.Model.Contracts;
 using AgileVentures.TezPusher.Model.PushEntities;
 using AgileVentures.TezPusher.Model.RpcEntities;
-using AgileVentures.TezPusher.Pusher.Web.Hubs;
+using AgileVentures.TezPusher.Web.Hubs;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 
-namespace AgileVentures.TezPusher.Pusher.Web.Services
+namespace AgileVentures.TezPusher.Web.Services
 {
     public interface IPushService
     {

@@ -4,7 +4,7 @@ using AgileVentures.TezPusher.Model.PushEntities;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 
-namespace AgileVentures.TezPusher.Pusher.Web.Hubs
+namespace AgileVentures.TezPusher.Web.Hubs
 {
     public class TezosHub : Hub
     {
