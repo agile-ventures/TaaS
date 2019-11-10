@@ -1,4 +1,4 @@
-# Sample Client for TaaS Public Endpoint
+# Sample Client for TezosLive.io Public Endpoint
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.3. Run `npm i -g @angular/cli` to install angular CLI globally.
 

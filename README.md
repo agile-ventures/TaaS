@@ -75,10 +75,18 @@ private  connect():  Observable<any> {
 You can then subscribe to transactions like this.
 
 ```typescript
-this.hubConnection.send("subscribe", { transactionAddresses: ['all'] });
+this.hubConnection.send("subscribe", { 
+   transactionAddresses: ['all'],
+   delegationAddresses: ['all'],
+   originationAddresses: ['all']
+});
 ```
 
-Note: `transactionAddresses` is a `string[]`. Specifying `'all'` will subscribe the client to all transactions.
+Note: `transactionAddresses`, `delegationAddresses` and `originationAdresses` are `string[]`.
+
+{% hint style="info" %}
+ Specifying **'all'** will subscribe the client to all transactions/delegations/originations respectively.
+{% endhint %}
 
 For reference please take a look at [AgileVentures.TezPusher.SampleClient.Web](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.SampleClient.Web) specifically [`signalr.service.ts`](https://github.com/agile-ventures/TaaS/blob/84fe386b38f5e488a194a2aa531b109c7dc435d6/AgileVentures.TezPusher.SampleClient.Web/src/app/signalr.service.ts#L65).
 
@@ -88,8 +96,8 @@ You will need to provide a [UUID](https://en.wikipedia.org/wiki/Universally_uniq
 
 You can see how the subscription to all transactions is being made by looking at the `signalr.service.ts` [here](https://github.com/agile-ventures/TaaS/blob/master/AgileVentures.TezPusher.SampleClient/src/app/signalr.service.ts) by making a `POST` request to `subscribe` endpoint with the following parameters
 
-* userId `[string]` - this is the UUID you have used for the `negotiate` call
-* transactionAddresses`[string[]]` - this is the array of the addresses that you want to subscribe to. You can subscribe to all addresses by sending `['all']`.
+* userId is `string` - this is the UUID you have used for the `negotiate` call
+* `transactionAddresses`, `delegationAddresses` and `originationAddresses`are `string[]` - this is the array of the addresses that you want to subscribe to. You can subscribe to all addresses by sending `['all']`
 
 You can also subscribe only to a subset of addresses, that you are interested in by providing them as a parameter to `subscribe` call. You need to provide the generated UUID that you used in the `negotiate` call along with the array of the addresses.
 
@@ -113,6 +121,6 @@ Solution consists of several projects described bellow
 
 ### Sample Client Applications
 
-* For [Option \#1](./#option-1---running-pusherweb-in-docker-most-convenient-at-the-moment) & [Option \#2](./#option-2---running-pusherweb-as-a-standalone-aspnet-core-app) - TODO
+* For [Option \#1](./#option-1---running-pusherweb-in-docker-most-convenient-at-the-moment) & [Option \#2](./#option-2---running-pusherweb-as-a-standalone-aspnet-core-app) - [AgileVentures.TezPusher.SampleClient.Web](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.SampleClient.Web)
 * For  [Option \#3](./#option-3---using-azure-functions-and-tezpusherconsoleapp) & [Option \#4](./#option-4---using-the-endpoint-from-tezosliveio) at [https://client-staging.tezoslive.io/](https://client-staging.tezoslive.io/)
 
