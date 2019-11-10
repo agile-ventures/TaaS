@@ -1,0 +1,10 @@
+version: "3"
+services:
+  web:
+    build: .
+    network_mode: bridge
+    image: tezoslive/agileventurestezpusherweb
+    ports:
+      - "80:80"
+    environment:
+      - Tezos:NodeUrl: ""

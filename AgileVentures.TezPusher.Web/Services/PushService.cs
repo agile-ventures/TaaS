@@ -31,7 +31,7 @@ namespace AgileVentures.TezPusher.Pusher.Web.Services
         {
             await _hubContext.Clients.All.SendAsync("block_headers", new PushMessage(model));
             //await _hubContext.Clients.Groups("block_headers").SendAsync("block_headers", new PushMessage(model));
-            _log.LogInformation($"Processing block {model.level}. Block header messages have been sent.");
+            _log.LogDebug($"Processing block {model.level}. Block header messages have been sent.");
         }
 
         public async Task PushOperations(BlockRpcEntity model)
@@ -40,7 +40,7 @@ namespace AgileVentures.TezPusher.Pusher.Web.Services
             await PushTransactions(model, operations);
             await PushDelegations(model, operations);
             await PushOriginations(model, operations);
-            _log.LogInformation($"Processing block {model.header.level}. All operation messages have been sent.");
+            _log.LogDebug($"Processing block {model.header.level}. All operation messages have been sent.");
         }
 
         private async Task PushTransactions(BlockRpcEntity model, BlockOperations operations)
@@ -65,7 +65,7 @@ namespace AgileVentures.TezPusher.Pusher.Web.Services
                         )
                         .SendAsync("transactions", message);
 
-                    _log.LogTrace($"Block {model.header.level} | " +
+                    _log.LogDebug($"Block {model.header.level} | " +
                                   $"Operation hash {transaction.hash} has been sent to the following groups [transactions_{transactionContent.source}, transactions_{transactionContent.destination}, transactions_all]");
                 }
             }
@@ -88,7 +88,7 @@ namespace AgileVentures.TezPusher.Pusher.Web.Services
                         )
                         .SendAsync("delegations", message);
 
-                    _log.LogTrace($"Block {model.header.level} | " +
+                    _log.LogDebug($"Block {model.header.level} | " +
                                   $"Operation hash {delegation.hash} has been sent to the following groups [delegations_{delegationContent.source}, delegations_{delegationContent.@delegate}, delegations_all]");
                 }
             }
@@ -110,7 +110,7 @@ namespace AgileVentures.TezPusher.Pusher.Web.Services
                         )
                         .SendAsync("originations", message);
 
-                    _log.LogTrace($"Block {model.header.level} | " +
+                    _log.LogDebug($"Block {model.header.level} | " +
                                   $"Operation hash {originations.hash} has been sent to the following groups [originations_{originationContent.source}, originations_all]");
                 }
             }

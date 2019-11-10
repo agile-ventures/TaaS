@@ -65,12 +65,12 @@ namespace AgileVentures.TezPusher.Pusher.Web.Services
                     await _pushService.PushBlockHeader(new HeadModel(block));
                     await _pushService.PushOperations(block);
 
-                    _logger.LogInformation($"Block {head.level} has been sent for processing.");
+                    _logger.LogInformation($"Block {head.level} has been sent to clients.");
                     _logger.LogTrace(line);
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, $"Failed to send the block for processing.");
+                    _logger.LogError(ex, $"Failed to send the block to clients.");
                 }
             }
         }
