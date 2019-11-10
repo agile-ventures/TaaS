@@ -30,7 +30,7 @@ This will expose port `80` to the host and set your Tezos Node RPC to `http://17
 
 **Do not forget to replace the NodeUrl per your environment!**
 
-Please make sure to check the [documentation](https://docs.tezoslive.io/docs-getting-started/docs-using-docker) for additional information .
+Please make sure to check the [documentation](https://docs.tezoslive.io/docs-getting-started/docs-using-docker) for additional information.
 #### Configuration needed
 
 Provide a configuration for `Pusher.Web` project in
@@ -69,6 +69,8 @@ API is currently limited to
 
 * 20 000 messages per account per day \(1 message is counted for each 64kB in case message has more than 64kB\)
 * 20 concurrent connection per account
+
+Please make sure to check the [documentation](https://docs.tezoslive.io/docs-getting-started/docs-using-tezoslive.io-endpoint) for additional information.
 
 For client side instructions please see [Subscribing to events from the client - Option 3 or 4](./#i-am-using-option-3-or-4).
 
