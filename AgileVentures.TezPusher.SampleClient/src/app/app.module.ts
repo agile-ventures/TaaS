@@ -18,13 +18,14 @@ import {
   MatDialogModule
 } from '@angular/material';
 import { ServiceUrlDialogComponent } from './serviceurl-dialog/serviceurl-dialog.component';
-import { AmountToTezPipe } from './amount-to-tez.pipe.';
+import { AmountToTezPipe, FeeToTezPipe } from './pipes';
 
 @NgModule({
   declarations: [
     AppComponent,
     ServiceUrlDialogComponent,
-    AmountToTezPipe
+    AmountToTezPipe,
+    FeeToTezPipe
   ],
   imports: [
     BrowserModule,
