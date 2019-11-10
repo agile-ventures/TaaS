@@ -1,8 +1,12 @@
+
 # TaaS \(Tezos as a Service\)
 
 ### About TaaS
 
-TaaS provides real-time updates to various applications based on the events happening on Tezos by leveraging SignalR \(WebSocket\). 
+TaaS provides real-time updates to various applications based on the events happening on Tezos by leveraging SignalR \(WebSocket\).
+
+### Documentation
+[https://docs.tezoslive.io/docs-welcome](https://docs.tezoslive.io/docs-welcome)
 
 ## Table of contents
 
@@ -16,11 +20,22 @@ TaaS provides real-time updates to various applications based on the events happ
 
 Ready-to-use docker image is available from Docker Hub here: [https://hub.docker.com/r/tezoslive/agileventurestezpusherweb](https://hub.docker.com/r/tezoslive/agileventurestezpusherweb).
 
+You can start the container by using the following command
+```
+docker run --rm -it -p 80:80 \
+--env Tezos:NodeUrl="http://172.17.0.1:8732" \
+tezoslive/agileventurestezpusherweb
+```
+This will expose port `80` to the host and set your Tezos Node RPC to `http://172.17.0.1:8732`.
+
+**Do not forget to replace the NodeUrl per your environment!**
+
+Please make sure to check the [documentation](https://docs.tezoslive.io/docs-getting-started/docs-using-docker) for additional information .
 #### Configuration needed
 
 Provide a configuration for `Pusher.Web` project in
 
-* the `ENV` variable `Tezos:NodeUrl` has to be set. Configured Tezos RPC endpoint has to support monitor call \(`monitor/heads/main`\).
+* the `ENV` variable `Tezos:NodeUrl` has to be set. Configured Tezos RPC endpoint has to support monitor call \(`monitor/heads/main`\ and `/chains/main/blocks/hash`).
 
 For client side instructions please see [Subscribing to events from the client - Option 1 or 2](./#i-am-using-option-1-or-2).
 
@@ -37,7 +52,8 @@ For client side instructions please see [Subscribing to events from the client -
 Configuration needed Provide a configuration for `Pusher.ConsoleApp` project in the `app.config` file. You will need to fill in these values
 
 * `<add key="NodeRpcEndpoint" value="TODO" />` Tezos RPC endpoint has to support monitor calls
-* `<add key="AzureFunctionEndpoint" value="TODO" />` Endpoint of your deployed function app
+* `<add key="AzureFunctionEndpointUrl" value="TODO" />` Endpoint of your deployed function app
+* `<add key="AzureFunctionKey" value="TODO" />` Access key for your message function of your deployed function app
 
 Provide a configuration for `Function` project in the `local.settings.json` file. There is a pre-filled endpoint which is hosted on Azure Free plan, so it might be already above daily threshold. You can create a SignalR Service on Azure for free on [Azure](https://azure.microsoft.com/en-us/) and provide your own SignalR connection string.
 
