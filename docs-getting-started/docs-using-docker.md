@@ -23,7 +23,7 @@ Example of the `docker run` command
 * setting the Tezos:NodeUrl environment variable to http://172.17.0.1:8732
 
 {% hint style="warning" %}
-Change the **Tezos:NodeUrl** based on your configuration!
+Do not forget to change the **Tezos:NodeUrl** based on your configuration!
 {% endhint %}
 
 ```text
