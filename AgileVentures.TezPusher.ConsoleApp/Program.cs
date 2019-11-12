@@ -5,7 +5,7 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using AgileVentures.TezPusher.Model.Configuration;
-using AgileVentures.TezPusher.Model.PushEntities;
+using AgileVentures.TezPusher.Model.RpcEntities;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using NLog;
@@ -22,11 +22,12 @@ namespace AgileVentures.TezPusher.ConsoleApp
         });
 
         private static Logger _log;
-        private static ConsoleAppConfig _appConfig;
+        private static AzureConfig _azureConfig;
+        private static TezosConfig _tezosConfig;
         private static bool _keepRunning = true;
 
-        private static string TezosMonitorUrl => $"{_appConfig.Tezos.NodeUrl}/monitor/heads/main";
-        private static string MessageUrl => $"{_appConfig.Azure.AzureFunctionUrl}/api/message?code={_appConfig.Azure.AzureFunctionKey}";
+        private static string TezosMonitorUrl => $"{_tezosConfig.NodeUrl}/monitor/heads/main";
+        private static string MessageUrl => $"{_azureConfig.AzureFunctionUrl}/api/message?code={_azureConfig.AzureFunctionKey}";
 
 
         static async Task Main(string[] args)
@@ -91,21 +92,22 @@ namespace AgileVentures.TezPusher.ConsoleApp
                 .AddEnvironmentVariables()
                 .Build();
 
-            _appConfig = configuration.GetSection("Settings").Get<ConsoleAppConfig>();
+            _azureConfig = configuration.GetSection("Azure").Get<AzureConfig>();
+            _tezosConfig = configuration.GetSection("Tezos").Get<TezosConfig>();
 
-            if (string.IsNullOrEmpty(_appConfig.Tezos.NodeUrl))
+            if (string.IsNullOrEmpty(_tezosConfig.NodeUrl))
             {
                 throw new ArgumentException(
                     $"Tezos:NodeUrl configuration is empty. Please provide a valid URL in appsettings.json or ENV variables.");
             }
 
-            if (string.IsNullOrEmpty(_appConfig.Azure.AzureFunctionUrl))
+            if (string.IsNullOrEmpty(_azureConfig.AzureFunctionUrl))
             {
                 throw new ArgumentException(
                     $"Azure:AzureFunctionUrl configuration is empty. Please provide a valid URL in appsettings.json or ENV variables.");
             }
 
-            if (string.IsNullOrEmpty(_appConfig.Azure.AzureFunctionKey))
+            if (string.IsNullOrEmpty(_azureConfig.AzureFunctionKey))
             {
                 throw new ArgumentException(
                     $"Azure:AzureFunctionKey configuration is empty. Please provide a valid key in appsettings.json or ENV variables.");
@@ -123,11 +125,11 @@ namespace AgileVentures.TezPusher.ConsoleApp
             string line;
             
             _log.Info("Started Tezos Node Monitoring");
-            while ((line = sr.ReadLine()) != null)
+            while ((line = sr.ReadLine()) != null && _keepRunning)
             {
                 try
                 {
-                    var head = JsonConvert.DeserializeObject<HeadModel>(line);
+                    var head = JsonConvert.DeserializeObject<MonitorHeadModel>(line);
 
                     var blockString = await Client.GetStringAsync(GetBlockUrl(head.hash));
 
@@ -145,7 +147,7 @@ namespace AgileVentures.TezPusher.ConsoleApp
 
         private static string GetBlockUrl(string hash)
         {
-            return $"{_appConfig.Tezos.NodeUrl}{string.Format("/chains/main/blocks/{0}", hash)}";
+            return $"{_tezosConfig.NodeUrl}{string.Format("/chains/main/blocks/{0}", hash)}";
         }
     }
 }

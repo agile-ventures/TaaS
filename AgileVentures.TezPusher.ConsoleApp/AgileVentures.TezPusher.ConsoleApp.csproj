@@ -17,6 +17,9 @@
      <ProjectReference Include="..\AgileVentures.TezPusher.Model\AgileVentures.TezPusher.Model.csproj" />
    </ItemGroup>
    <ItemGroup>
+     <None Update="appsettings.json">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </None>
      <None Update="nlog.config">
        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
      </None>
