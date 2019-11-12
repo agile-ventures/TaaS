@@ -25,8 +25,8 @@ namespace AgileVentures.TezPusher.ConsoleApp
         private static ConsoleAppConfig _appConfig;
         private static bool _keepRunning = true;
 
-        private static readonly string TezosMonitorUrl = $"{_appConfig.Tezos.NodeUrl}/monitor/heads/main";
-        private static readonly string MessageUrl = $"{_appConfig.Azure.AzureFunctionUrl}/api/message?code={_appConfig.Azure.AzureFunctionKey}";
+        private static string TezosMonitorUrl => $"{_appConfig.Tezos.NodeUrl}/monitor/heads/main";
+        private static string MessageUrl => $"{_appConfig.Azure.AzureFunctionUrl}/api/message?code={_appConfig.Azure.AzureFunctionKey}";
 
 
         static async Task Main(string[] args)
@@ -96,19 +96,19 @@ namespace AgileVentures.TezPusher.ConsoleApp
             if (string.IsNullOrEmpty(_appConfig.Tezos.NodeUrl))
             {
                 throw new ArgumentException(
-                    $"NodeRpcEndpoint configuration is empty. Please provide a valid URL in .config file.");
+                    $"Tezos:NodeUrl configuration is empty. Please provide a valid URL in appsettings.json or ENV variables.");
             }
 
             if (string.IsNullOrEmpty(_appConfig.Azure.AzureFunctionUrl))
             {
                 throw new ArgumentException(
-                    $"AzureFunctionUrl configuration is empty. Please provide a valid URL in .config file.");
+                    $"Azure:AzureFunctionUrl configuration is empty. Please provide a valid URL in appsettings.json or ENV variables.");
             }
 
             if (string.IsNullOrEmpty(_appConfig.Azure.AzureFunctionKey))
             {
                 throw new ArgumentException(
-                    $"AzureFunctionKey configuration is empty. Please provide a valid key in .config file.");
+                    $"Azure:AzureFunctionKey configuration is empty. Please provide a valid key in appsettings.json or ENV variables.");
             }
         }
 
