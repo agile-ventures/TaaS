@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "AgileVentures.TezPusher.ConsoleApp": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
