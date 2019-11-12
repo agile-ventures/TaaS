@@ -33,6 +33,14 @@ Example of the `docker run` command
 * setting the `Azure:AzureFunctionUrl` env. variable to [https://myfunction.azurewebsites.net](https://myfunction.azurewebsites.net)
 * setting the `Azure:AzureFunctionKey` env. variable to MySecretFunctionKey
 
+{% hint style="warning" %}
+Be sure to configure the following ENV keys correctly per your environment
+
+* `Tezos:NodeUrl`
+* `Azure:AzureFunctionUrl`
+* `Azure:AzureFunctionKey`
+{% endhint %}
+
 ```text
 docker run -it --env Tezos:NodeUrl="https://172.17.0.1:8732" \
 --env Azure:AzureFunctionUrl="https://myfunction.azurewebsites.net" \
@@ -44,14 +52,6 @@ This infrastructure setup has the following benefits
 
 * It allows you to have a more robust security out of the box as all communication is encrypted by TLS. 
 * It also makes scaling your applications for thousands of subscribers much easier by using serveless compute with scalable SignalR Service.
-
-{% hint style="warning" %}
-Be sure to configure the following ENV keys correctly per your environment
-
-* `Tezos:NodeUrl`
-* `Azure:AzureFunctionUrl`
-* `Azure:AzureFunctionKey`
-{% endhint %}
 
 **For client side instructions** please see [Subscribing to events from the client - Option 3 or 4](../#i-am-using-option-3-or-4).
 
