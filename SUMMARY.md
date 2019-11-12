@@ -7,11 +7,12 @@
 
 * [Using TezosLive.io Endpoint](docs-getting-started/docs-using-tezoslive.io-endpoint.md)
 * [Using Docker](docs-getting-started/docs-using-docker.md)
+* [Using Docker with Azure Functions and SignalR Service](docs-getting-started/docs-using-docker-and-serveless.md)
 
 ## Sample Clients <a id="docs-sample-clients"></a>
 
-* [Sample Client for TezosLive.io Public Endpoint](docs-sample-clients/agileventures.tezpusher.sampleclient.md)
-* [Sample Client for TaaS Web & Docker](docs-sample-clients/agileventures.tezpusher.sampleclient.web.md)
+* [Sample Client for TezosLive.io Public Endpoint](docs-sample-clients/docs-agileventures.tezpusher.sampleclient.md)
+* [Sample Client for TaaS Web & Docker](docs-sample-clients/docs-agileventures.tezpusher.sampleclient.web.md)
 
 ## External Links <a id="docs-external-links"></a>
 

@@ -1,4 +1,3 @@
-
 # TaaS \(Tezos as a Service\)
 
 ### About TaaS
@@ -6,6 +5,7 @@
 TaaS provides real-time updates to various applications based on the events happening on Tezos by leveraging SignalR \(WebSocket\).
 
 ### Documentation
+
 [https://docs.tezoslive.io/docs-welcome](https://docs.tezoslive.io/docs-welcome)
 
 ## Table of contents
@@ -21,21 +21,24 @@ TaaS provides real-time updates to various applications based on the events happ
 Ready-to-use docker image is available from Docker Hub here: [https://hub.docker.com/r/tezoslive/agileventurestezpusherweb](https://hub.docker.com/r/tezoslive/agileventurestezpusherweb).
 
 You can start the container by using the following command
-```
+
+```text
 docker run --rm -it -p 80:80 \
 --env Tezos:NodeUrl="http://172.17.0.1:8732" \
 tezoslive/agileventurestezpusherweb
 ```
+
 This will expose port `80` to the host and set your Tezos Node RPC to `http://172.17.0.1:8732`.
 
 **Do not forget to replace the NodeUrl per your environment!**
 
 Please make sure to check the [documentation](https://docs.tezoslive.io/docs-getting-started/docs-using-docker) for additional information.
+
 #### Configuration needed
 
 Provide a configuration for `Pusher.Web` project in
 
-* the `ENV` variable `Tezos:NodeUrl` has to be set. Configured Tezos RPC endpoint has to support monitor call \(`monitor/heads/main`\ and `/chains/main/blocks/hash`).
+* the `ENV` variable `Tezos:NodeUrl` has to be set. Configured Tezos RPC endpoint has to support monitor call \(`monitor/heads/main` and `/chains/main/blocks/hash`\).
 
 For client side instructions please see [Subscribing to events from the client - Option 1 or 2](./#i-am-using-option-1-or-2).
 
@@ -61,7 +64,7 @@ Provide a configuration for `Function` project in the `local.settings.json` file
 
 For client side instructions please see [Subscribing to events from the client - Option 3 or 4](./#i-am-using-option-3-or-4).
 
-### Option \#4 - Using the endpoint from [TezosLive.io](https://tezoslive.io)  \(most convenient\) 
+### Option \#4 - Using the endpoint from [TezosLive.io](https://tezoslive.io)  \(most convenient\)
 
 Sign in using your GitHub account on [TezosLive.io](https://tezoslive.io) and request your endpoint. There is no need to setup or host anything on the server side.
 
@@ -103,7 +106,7 @@ this.hubConnection.send("subscribe", {
 Note: `transactionAddresses`, `delegationAddresses` and `originationAdresses` are `string[]`.
 
 {% hint style="info" %}
- Specifying **'all'** will subscribe the client to all transactions/delegations/originations respectively.
+Specifying **'all'** will subscribe the client to all transactions/delegations/originations respectively.
 {% endhint %}
 
 For reference please take a look at [AgileVentures.TezPusher.SampleClient.Web](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.SampleClient.Web) specifically [`signalr.service.ts`](https://github.com/agile-ventures/TaaS/blob/84fe386b38f5e488a194a2aa531b109c7dc435d6/AgileVentures.TezPusher.SampleClient.Web/src/app/signalr.service.ts#L65).
