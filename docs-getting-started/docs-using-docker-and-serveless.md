@@ -51,7 +51,7 @@ docker run -it --env Tezos:NodeUrl="https://172.17.0.1:8732" \
 This infrastructure setup has the following benefits 
 
 * It allows you to have a more robust security out of the box as all communication is encrypted by TLS. 
-* It also makes scaling your applications for thousands of subscribers much easier by using serveless compute with scalable SignalR Service.
+* It makes scaling your applications for thousands of subscribers much easier by using serveless compute with scalable SignalR Service.
 
 **For client side instructions** please see [Subscribing to events from the client - Option 3 or 4](../#i-am-using-option-3-or-4).
 

@@ -46,7 +46,7 @@ For client side instructions please see [Subscribing to events from the client -
 
 Configuration needed Provide a configuration for `Pusher.Web` project in
 
-* `appsettings.json` file. You will need to fill in this value `"NodeUrl": ""` - Configured Tezos RPC endpoint has to support monitor call \(`monitor/heads/main`\).
+* `appsettings.json` file. You will need to fill in this value `"NodeUrl": ""` - Configured Tezos RPC endpoint must support monitor call \(`monitor/heads/main`\).
 
 For client side instructions please see [Subscribing to events from the client - Option 1 or 2](./#i-am-using-option-1-or-2).
 

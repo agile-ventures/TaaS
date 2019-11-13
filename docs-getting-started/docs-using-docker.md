@@ -50,7 +50,7 @@ By providing ENV variable **Logging:LogLevel:Default** you can configure logging
 #### Configure SSL/TLS for Your TaaS Docker Image
 
 {% hint style="warning" %}
-If you are considering opening up your ports to the public you should configure a certificate and only expose **HTTPS** endpoint to the outside.
+If you are considering opening up your ports to the public, you should configure a certificate and only expose **HTTPS** endpoint to the outside.
 {% endhint %}
 
 Example of the `docker run` command for Linux
