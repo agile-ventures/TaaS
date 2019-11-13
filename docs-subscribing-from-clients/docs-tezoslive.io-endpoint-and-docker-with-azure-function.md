@@ -35,13 +35,13 @@ this.hubConnection.start().catch(err => console.error(err.toString()));
 
 You can also check our Sample Client [source code](https://github.com/agile-ventures/TaaS/blob/c961382c1bf5815633da7e1ba0c4865fbe65873e/AgileVentures.TezPusher.SampleClient/src/app/signalr.service.ts#L146) and [SignalR Client Documentation](https://docs.microsoft.com/en-us/aspnet/core/signalr/client-features?view=aspnetcore-3.0).
 
-### 3. Subscribing to events
+### 3. Subscribing to updates
 
 {% hint style="info" %}
 See [**/api/subscribe**](../docs-api-endpoints/docs-api-subscribe.md) for more details.
 {% endhint %}
 
-### 4. Unsubscribing
+### 4. Unsubscribe from updates
 
 {% hint style="info" %}
 See [**/api/unsubscribe**](../docs-api-endpoints/docs-api-unsubscribe.md) for more details.

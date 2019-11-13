@@ -24,7 +24,7 @@ private  connect():  Observable<any> {
 }
 ```
 
-### 2. Subscribe to events
+### 2. Subscribe to updates
 
 You can then subscribe to events like this. You can only specify the event types you are interested in. 
 
@@ -45,7 +45,7 @@ Note: `transactionAddresses`, `delegationAddresses` and `originationAdresses` ar
 
 For reference please take a look at [AgileVentures.TezPusher.SampleClient.Web](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.SampleClient.Web) specifically [`signalr.service.ts`](https://github.com/agile-ventures/TaaS/blob/84fe386b38f5e488a194a2aa531b109c7dc435d6/AgileVentures.TezPusher.SampleClient.Web/src/app/signalr.service.ts#L65).
 
-### 3. Unsubscribe from events
+### 3. Unsubscribe from updates
 
 You can unsubscribe from events similarly to subscribing.
 
