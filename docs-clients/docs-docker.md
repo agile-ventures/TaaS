@@ -14,6 +14,12 @@ For reference please take a look at [AgileVentures.TezPusher.SampleClient.Web](h
 
 You can connect to the hub for example like this \(see [`signalr.service.ts`](https://github.com/agile-ventures/TaaS/blob/84fe386b38f5e488a194a2aa531b109c7dc435d6/AgileVentures.TezPusher.SampleClient.Web/src/app/signalr.service.ts#L65)\).
 
+{% hint style="warning" %}
+You need a SignalR client library. In this sample we are using [https://www.npmjs.com/package/@aspnet/signalr](https://www.npmjs.com/package/@aspnet/signalr).
+
+Your usage may vary depending on your programming language and used client library.
+{% endhint %}
+
 ```typescript
 private  connect():  Observable<any> {
     this.hubConnection  = new signalR.HubConnectionBuilder()

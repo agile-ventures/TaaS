@@ -15,6 +15,12 @@ Or you can check out deployed version of this app available at [https://client-s
 
 ### 2. Connecting to the SignalR Hub
 
+{% hint style="warning" %}
+You need a SignalR client library. In this sample we are using [https://www.npmjs.com/package/@aspnet/signalr](https://www.npmjs.com/package/@aspnet/signalr).
+
+Your usage may vary depending on your programming language and used client library.
+{% endhint %}
+
 Using the data from the `/api/negotiate` response we can now connect to a SignalR hub, where
 
 * `{url}` is the `url` parameter from `/api/negotiate` response call
