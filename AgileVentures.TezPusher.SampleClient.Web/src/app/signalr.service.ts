@@ -101,7 +101,7 @@ export class SignalRService {
 
     constructor() { }
 
-    private subscribeToTransactions(model: Subscription): Observable<any> {
+    private subscribeToAll(model: Subscription): Observable<any> {
         return from(this.hubConnection.send('subscribe', model));
     }
 
@@ -123,7 +123,7 @@ export class SignalRService {
                 delegationAddresses: ['all'],
                 originationAddresses: ['all']
             };
-            this.subscribeToTransactions(model)
+            this.subscribeToAll(model)
                 .subscribe(() => {
                     console.log(`subscribed to all transactions, originations and delegations`);
                 });

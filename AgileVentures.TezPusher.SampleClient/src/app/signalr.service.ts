@@ -112,7 +112,7 @@ export class SignalRService {
             });
     }
 
-    private subscribeToTransactions(model: Subscription): Observable<any> {
+    private subscribeToAll(model: Subscription): Observable<any> {
         const requestUrl = `${this.baseUrl}subscribe`;
         const httpOptions = {
             headers: new HttpHeaders({
@@ -138,7 +138,7 @@ export class SignalRService {
                 delegationAddresses: ['all'],
                 originationAddresses: ['all']
             };
-            this.subscribeToTransactions(model)
+            this.subscribeToAll(model)
                 .subscribe(() => {
                     console.log(`subscribed to all transactions, originations and delegations`);
                 });
