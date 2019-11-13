@@ -36,6 +36,12 @@ You can also check our Sample Client [source code](https://github.com/agile-vent
 See [**/api/subscribe**](../docs-api-endpoints/docs-api-subscribe.md) for more details.
 {% endhint %}
 
+### 4. Unsubscribing
+
+{% hint style="info" %}
+See [**/api/unsubscribe**](../docs-api-endpoints/docs-api-unsubscribe.md) for more details.
+{% endhint %}
+
 ### Sample Client
 
 For reference please take a look at [AgileVentures.TezPusher.SampleClient](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.SampleClient).

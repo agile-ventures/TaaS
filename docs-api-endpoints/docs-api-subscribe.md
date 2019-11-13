@@ -51,6 +51,6 @@ UUID used in `/api/negotiate`
 {% endapi-method %}
 
 {% hint style="info" %}
-You can subscribe to **all** addresses by sending `['all']` in any of the arrays.
+You can subscribe to **all** addresses by sending `['all']` in any of the optional parameters.
 {% endhint %}
 
