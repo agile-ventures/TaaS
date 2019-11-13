@@ -4,6 +4,11 @@ description: If you are using TezosLive.io Endpoint or Azure Functions.
 
 # Clients - TezosLive.io Endpoint or Azure Functions
 
+### Sample Client
+
+For reference please take a look at [AgileVentures.TezPusher.SampleClient](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.SampleClient).  
+Or you can check out deployed version of this app available here [https://client-staging.tezoslive.io/](https://client-staging.tezoslive.io/).
+
 ### 1. Getting the url and accessToken from the /api/negotiate
 
 {% hint style="info" %}
@@ -42,9 +47,5 @@ See [**/api/subscribe**](../docs-api-endpoints/docs-api-subscribe.md) for more d
 See [**/api/unsubscribe**](../docs-api-endpoints/docs-api-unsubscribe.md) for more details.
 {% endhint %}
 
-### Sample Client
-
-For reference please take a look at [AgileVentures.TezPusher.SampleClient](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.SampleClient).
-
-Or you can check out deployed version of this app available here [https://client-staging.tezoslive.io/](https://client-staging.tezoslive.io/).
+### 
 

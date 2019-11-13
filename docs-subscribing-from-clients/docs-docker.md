@@ -6,6 +6,10 @@ description: >-
 
 # Clients - Docker
 
+### Sample Client
+
+For reference please take a look at [AgileVentures.TezPusher.SampleClient.Web](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.SampleClient.Web).
+
 ### 1. Connect to SignalR Hub
 
 You can connect to the hub for example like this \(see [`signalr.service.ts`](https://github.com/agile-ventures/TaaS/blob/84fe386b38f5e488a194a2aa531b109c7dc435d6/AgileVentures.TezPusher.SampleClient.Web/src/app/signalr.service.ts#L65)\).
