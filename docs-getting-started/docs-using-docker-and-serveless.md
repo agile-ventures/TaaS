@@ -53,7 +53,9 @@ This infrastructure setup has the following benefits
 * It allows you to have a more robust security out of the box as all communication is encrypted by TLS. 
 * It makes scaling your applications for thousands of subscribers much easier by using serveless compute with scalable SignalR Service.
 
-**For client side instructions** please see [Clients - TezosLive.io Endpoint or Azure Functions](../docs-subscribing-from-clients/docs-tezoslive.io-endpoint-and-docker-with-azure-function.md).
+**For client side instructions** please see
+
+{% page-ref page="../docs-clients/docs-taas-endpoint-or-function.md" %}
 
 {% hint style="info" %}
 More information about **Azure Functions** can be found at [https://azure.microsoft.com/en-us/services/functions/](https://azure.microsoft.com/en-us/services/functions/).

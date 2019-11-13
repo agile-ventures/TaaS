@@ -11,9 +11,7 @@ Or you can check out deployed version of this app available at [https://client-s
 
 ### 1. Getting the url and accessToken from the /api/negotiate
 
-{% hint style="info" %}
-See [**/api/negotiate**](../docs-api-endpoints/docs-negotiate.md) ****for more details.
-{% endhint %}
+{% page-ref page="../docs-api-endpoints/docs-negotiate.md" %}
 
 ### 2. Connecting to the SignalR Hub
 
@@ -37,15 +35,11 @@ You can also check our Sample Client [source code](https://github.com/agile-vent
 
 ### 3. Subscribing to updates
 
-{% hint style="info" %}
-See [**/api/subscribe**](../docs-api-endpoints/docs-api-subscribe.md) for more details.
-{% endhint %}
+{% page-ref page="../docs-api-endpoints/docs-api-subscribe.md" %}
 
 ### 4. Unsubscribe from updates
 
-{% hint style="info" %}
-See [**/api/unsubscribe**](../docs-api-endpoints/docs-api-unsubscribe.md) for more details.
-{% endhint %}
+{% page-ref page="../docs-api-endpoints/docs-api-unsubscribe.md" %}
 
 ### 
 

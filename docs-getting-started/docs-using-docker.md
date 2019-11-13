@@ -45,7 +45,9 @@ By providing ENV variable **Logging:LogLevel:Default** you can configure logging
 * Critical
 {% endhint %}
 
-**For client side instructions** please see [Clients - Docker](../docs-subscribing-from-clients/docs-docker.md).
+**For client side instructions** please see 
+
+{% page-ref page="../docs-clients/docs-docker.md" %}
 
 #### Configure SSL/TLS for Your TaaS Docker Image
 

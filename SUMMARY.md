@@ -9,10 +9,11 @@
 * [Using Docker](docs-getting-started/docs-using-docker.md)
 * [Using Docker with Azure Functions and SignalR Service](docs-getting-started/docs-using-docker-and-serveless.md)
 
-## subscribing from clients <a id="docs-subscribing-from-clients"></a>
+## subscribing from clients <a id="docs-clients"></a>
 
-* [Clients - TezosLive.io Endpoint or Azure Functions](docs-subscribing-from-clients/docs-tezoslive.io-endpoint-and-docker-with-azure-function.md)
-* [Clients - Docker](docs-subscribing-from-clients/docs-docker.md)
+* [Clients - TezosLive.io Endpoint or Azure Functions](docs-clients/docs-taas-endpoint-or-function.md)
+* [Clients - Docker](docs-clients/docs-docker.md)
+* [Typescript Definitions](docs-clients/docs-typescript-definition.md)
 
 ## API Endpoints <a id="docs-api-endpoints"></a>
 
