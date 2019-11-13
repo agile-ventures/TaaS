@@ -1,4 +1,8 @@
-# Sample Client for TezosLive.io Public Endpoint
+# Sample Client for TezosLive.io Public Endpoint or Azure Functions
+
+{% hint style="info" %}
+Source code is available on [**GitHub**](https://github.com/agile-ventures/TaaS/blob/master/AgileVentures.TezPusher.SampleClient).
+{% endhint %}
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.3. Run `npm i -g @angular/cli` to install angular CLI globally.
 

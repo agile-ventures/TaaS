@@ -30,7 +30,9 @@ tezoslive/agileventurestezpusherweb
 
 This will expose port `80` to the host and set your Tezos Node RPC to `http://172.17.0.1:8732`.
 
+{% hint style="warning" %}
 **Do not forget to replace the NodeUrl per your environment!**
+{% endhint %}
 
 Please make sure to check the [documentation](https://docs.tezoslive.io/docs-getting-started/docs-using-docker) for additional information.
 
@@ -38,27 +40,39 @@ Please make sure to check the [documentation](https://docs.tezoslive.io/docs-get
 
 Provide a configuration for `Pusher.Web` project in
 
-* the `ENV` variable `Tezos:NodeUrl` has to be set. Configured Tezos RPC endpoint has to support monitor call \(`monitor/heads/main` and `/chains/main/blocks/hash`\).
+* the `ENV` variable `Tezos:NodeUrl` has to be set. Configured Tezos RPC endpoint ****must support following calls 
+  * `monitor/heads/main` 
+  * `/chains/main/blocks/{hash}`
 
 For client side instructions please see [Subscribing to events from the client - Option 1 or 2](./#i-am-using-option-1-or-2).
 
 ### Option \#2 - Running [Pusher.Web](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.Pusher.Web) as a standalone ASP.NET Core app
 
-Configuration needed Provide a configuration for `Pusher.Web` project in
+Provide a configuration for `Pusher.Web` project in
 
-* `appsettings.json` file. You will need to fill in this value `"NodeUrl": ""` - Configured Tezos RPC endpoint must support monitor call \(`monitor/heads/main`\).
+* `appsettings.json` file. You will need to fill in this value `"NodeUrl": ""` . Configured Tezos RPC endpoint must support following calls 
+  * `monitor/heads/main` 
+  * `/chains/main/blocks/{hash}`
 
 For client side instructions please see [Subscribing to events from the client - Option 1 or 2](./#i-am-using-option-1-or-2).
 
 ### Option \#3 - Using Azure Functions and TezPusher.ConsoleApp
 
-Configuration needed Provide a configuration for `Pusher.ConsoleApp` project in the `app.config` file. You will need to fill in these values
+#### ConsoleApp Configuration
 
-* `<add key="NodeRpcEndpoint" value="TODO" />` Tezos RPC endpoint has to support monitor calls
-* `<add key="AzureFunctionEndpointUrl" value="TODO" />` Endpoint of your deployed function app
-* `<add key="AzureFunctionKey" value="TODO" />` Access key for your message function of your deployed function app
+Provide a configuration for `ConsoleApp` project in the `appsettings.json` file if you are running from compiled sources or `ENV` variables if you are running from Docker. 
 
-Provide a configuration for `Function` project in the `local.settings.json` file. There is a pre-filled endpoint which is hosted on Azure Free plan, so it might be already above daily threshold. You can create a SignalR Service on Azure for free on [Azure](https://azure.microsoft.com/en-us/) and provide your own SignalR connection string.
+{% hint style="warning" %}
+Be sure to configure the following keys correctly per your environment
+
+* `Tezos:NodeUrl` - Tezos RPC endpoint URL
+* `Azure:AzureFunctionUrl` - URL of your deployed function app
+* `Azure:AzureFunctionKey` - Access key for your message function of your deployed function app
+{% endhint %}
+
+#### Function App Configuration
+
+Provide a configuration for `Function` project in the `local.settings.json` file if you are running it locally or Azure Applications Settings if you are running in Azure. There is a pre-filled endpoint which is hosted on Azure Free plan, so it might be already above daily threshold. You can create a SignalR Service on Azure for free on [Azure](https://azure.microsoft.com/en-us/) and provide your own SignalR connection string.
 
 * `"AzureSignalRConnectionString": ""`    
 
@@ -66,7 +80,11 @@ For client side instructions please see [Subscribing to events from the client -
 
 ### Option \#4 - Using the endpoint from [TezosLive.io](https://tezoslive.io)  \(most convenient\)
 
-Sign in using your GitHub account on [TezosLive.io](https://tezoslive.io) and request your endpoint. There is no need to setup or host anything on the server side.
+Sign in using your GitHub account on [TezosLive.io](https://tezoslive.io) and request your endpoint. 
+
+{% hint style="info" %}
+You don't need to host anything on server side.
+{% endhint %}
 
 API is currently limited to
 
@@ -76,6 +94,8 @@ API is currently limited to
 Please make sure to check the [documentation](https://docs.tezoslive.io/docs-getting-started/docs-using-tezoslive.io-endpoint) for additional information.
 
 For client side instructions please see [Subscribing to events from the client - Option 3 or 4](./#i-am-using-option-3-or-4).
+
+If you need more messages or concurrent connections please contact us _hello AT tezoslive.io._
 
 ## Subscribing to events from the client
 

@@ -26,7 +26,7 @@ Public API endpoints are currently limited to
 * 20 concurrent connection per account
 {% endhint %}
 
-**For client side instructions** please see [Subscribing to events from the client - Option 3 or 4](../#i-am-using-option-3-or-4).
+**For client side instructions** please see [Clients - TezosLive.io Endpoint or Azure Functions](../docs-subscribing-from-clients/docs-tezoslive.io-endpoint-and-docker-with-azure-function.md).
 
 
 

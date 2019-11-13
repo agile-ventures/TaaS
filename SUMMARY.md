@@ -9,9 +9,20 @@
 * [Using Docker](docs-getting-started/docs-using-docker.md)
 * [Using Docker with Azure Functions and SignalR Service](docs-getting-started/docs-using-docker-and-serveless.md)
 
+## subscribing from clients <a id="docs-subscribing-from-clients"></a>
+
+* [Clients - TezosLive.io Endpoint or Azure Functions](docs-subscribing-from-clients/docs-tezoslive.io-endpoint-and-docker-with-azure-function.md)
+* [Clients - Docker](docs-subscribing-from-clients/docs-docker.md)
+
+## API Endpoints <a id="docs-api-endpoints"></a>
+
+* [/api/negotiate](docs-api-endpoints/docs-negotiate.md)
+* [/api/subscribe](docs-api-endpoints/docs-api-subscribe.md)
+* [/api/unsubscribe](docs-api-endpoints/docs-api-unsubscribe.md)
+
 ## Sample Clients <a id="docs-sample-clients"></a>
 
-* [Sample Client for TezosLive.io Public Endpoint](docs-sample-clients/docs-agileventures.tezpusher.sampleclient.md)
+* [Sample Client for TezosLive.io Public Endpoint or Azure Functions](docs-sample-clients/docs-agileventures.tezpusher.sampleclient.md)
 * [Sample Client for TaaS Web & Docker](docs-sample-clients/docs-agileventures.tezpusher.sampleclient.web.md)
 
 ## External Links <a id="docs-external-links"></a>
