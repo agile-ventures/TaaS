@@ -7,7 +7,7 @@ description: If you are using TezosLive.io Endpoint or Azure Functions.
 ### Sample Client
 
 For reference please take a look at [AgileVentures.TezPusher.SampleClient](https://github.com/agile-ventures/TaaS/tree/master/AgileVentures.TezPusher.SampleClient).  
-Or you can check out deployed version of this app available here [https://client-staging.tezoslive.io/](https://client-staging.tezoslive.io/).
+Or you can check out deployed version of this app available at [https://client-staging.tezoslive.io/](https://client-staging.tezoslive.io/).
 
 ### 1. Getting the url and accessToken from the /api/negotiate
 
