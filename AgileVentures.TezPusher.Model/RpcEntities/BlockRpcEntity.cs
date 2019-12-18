@@ -91,6 +91,8 @@ namespace AgileVentures.TezPusher.Model.RpcEntities
         public List<string> originated_contracts { get; set; }
         public string paid_storage_size_diff { get; set; }
         public string storage_size { get; set; }
+        public object storage { get; set; }
+        public object big_map_diff { get; set; }
     }
 
     public class BlockTransactionInternalOperationResult
@@ -126,6 +128,7 @@ namespace AgileVentures.TezPusher.Model.RpcEntities
     {
         public string amount { get; set; }
         public string destination { get; set; }
+        public object parameters { get; set; }
         public BlockTransactionMetadata metadata { get; set; }
 
         public string GetTransactionSource()
@@ -140,7 +143,7 @@ namespace AgileVentures.TezPusher.Model.RpcEntities
 
         private bool IsInternalTransaction()
         {
-            return amount == "0" && metadata.internal_operation_results.Any(ior =>
+            return amount == "0" && metadata.internal_operation_results != null && metadata.internal_operation_results.Any(ior =>
                        ior.kind == TezosBlockOperationConstants.Transaction &&
                        ior.result.status == TezosBlockOperationConstants.OperationResultStatusApplied);
         }
