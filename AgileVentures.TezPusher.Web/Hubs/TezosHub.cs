@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using AgileVentures.TezPusher.Model.PushEntities;
+using AgileVentures.TezPusher.Web.Services;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 
@@ -9,10 +10,12 @@ namespace AgileVentures.TezPusher.Web.Hubs
     public class TezosHub : Hub
     {
         private ILogger<TezosHub> _log;
+        private ITezosHistoryService _tezosHistoryService;
 
-        public TezosHub(ILogger<TezosHub> log)
+        public TezosHub(ILogger<TezosHub> log, ITezosHistoryService tezosHistoryService)
         {
             _log = log;
+            _tezosHistoryService = tezosHistoryService;
         }
 
         public async Task SendMessage(string method, string data)
@@ -22,6 +25,16 @@ namespace AgileVentures.TezPusher.Web.Hubs
 
         public async Task Subscribe(SubscribeModel model)
         {
+            if (model.FromBlockLevel.HasValue)
+            {
+                await _tezosHistoryService.ProcessHistoryAsync(Clients.Caller, Context.ConnectionId, model);
+            }
+
+            if (model.BlockHeaders)
+            {
+                await Groups.AddToGroupAsync(Context.ConnectionId, "block_headers");
+            }
+
             foreach (var address in model.TransactionAddresses)
             {
                 await Groups.AddToGroupAsync(Context.ConnectionId, $"transactions_{address}");
@@ -37,6 +50,11 @@ namespace AgileVentures.TezPusher.Web.Hubs
                 await Groups.AddToGroupAsync(Context.ConnectionId, $"delegations_{address}");
             }
             await Clients.Caller.SendAsync("subscribed",new object[] { model });
+
+            if (model.FromBlockLevel != null)
+            {
+
+            }
         }
         public async Task Unsubscribe(SubscribeModel model)
         {

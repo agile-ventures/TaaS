@@ -51,6 +51,8 @@ namespace AgileVentures.TezPusher.Web
                 new HttpClientHandler { AllowAutoRedirect = false, MaxAutomaticRedirections = 20 }
             );
             services.AddSingleton<IPushService, PushService>();
+            services.AddSingleton<IPushHistoryService, PushHistoryService>();
+            services.AddSingleton<ITezosHistoryService, TezosHistoryService>();
             services.AddHostedService<TezosMonitorService>();
             services.AddSignalR();
         }

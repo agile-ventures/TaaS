@@ -15,6 +15,12 @@ namespace AgileVentures.TezPusher.Model.PushEntities
         public List<string> OriginationAddresses { get; set; }
 
         [JsonProperty(PropertyName = "delegationAddresses", NullValueHandling = NullValueHandling.Ignore)]
-        public List<string> DelegationAddresses { get; set; } 
+        public List<string> DelegationAddresses { get; set; }
+
+        [JsonProperty(PropertyName = "fromBlockLevel", NullValueHandling = NullValueHandling.Ignore)]
+        public ulong? FromBlockLevel { get; set; }
+
+        [JsonProperty(PropertyName = "blockHeaders", NullValueHandling = NullValueHandling.Ignore)]
+        public bool BlockHeaders { get; set; }
     }
 }

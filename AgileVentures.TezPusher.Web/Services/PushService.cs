@@ -29,8 +29,8 @@ namespace AgileVentures.TezPusher.Web.Services
 
         public async Task PushBlockHeader(HeadModel model)
         {
-            await _hubContext.Clients.All.SendAsync("block_headers", new PushMessage(model));
-            //await _hubContext.Clients.Groups("block_headers").SendAsync("block_headers", new PushMessage(model));
+            //await _hubContext.Clients.All.SendAsync("block_headers", new PushMessage(model));
+            await _hubContext.Clients.Groups("block_headers").SendAsync("block_headers", new PushMessage(model));
             _log.LogDebug($"Processing block {model.level}. Block header messages have been sent.");
         }
 

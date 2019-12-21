@@ -81,6 +81,8 @@ export interface Subscription {
     transactionAddresses: string[];
     delegationAddresses: string[];
     originationAddresses: string[];
+    fromBlockLevel?: number;
+    blockHeaders: boolean;
 }
 
 @Injectable()
@@ -121,7 +123,9 @@ export class SignalRService {
             const model = <Subscription>{
                 transactionAddresses: ['all'],
                 delegationAddresses: ['all'],
-                originationAddresses: ['all']
+                originationAddresses: ['all'],
+                fromBlockLevel: 744190,
+                blockHeaders: true
             };
             this.subscribeToAll(model)
                 .subscribe(() => {
