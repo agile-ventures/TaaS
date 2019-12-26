@@ -23,14 +23,12 @@ Your usage may vary depending on your programming language and used client libra
 
 Using the data from the `/api/negotiate` response we can now connect to a SignalR hub, where
 
-* `url` is the `url` parameter from `/api/negotiate` response call
-* add `accessToken` using `accessTokenFactory` option containing `accessToken` from 
-
-  `/api/negotiate` response call
+* `response.url` is the `url` parameter from `/api/negotiate` response call
+* `response.accessToken` is the `accessToken` parameter from`/api/negotiate` response call. 
 
 ```text
 this.hubConnection = new signalR.HubConnectionBuilder()
-                .withUrl(url, { accessTokenFactory: () => response.accessToken })
+                .withUrl(response.url, { accessTokenFactory: () => response.accessToken })
                 .configureLogging(signalR.LogLevel.Information)
                 .build();
 
