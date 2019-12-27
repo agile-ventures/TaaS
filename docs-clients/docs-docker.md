@@ -38,11 +38,17 @@ You can then subscribe to events like this. You can only specify the event types
 this.hubConnection.send("subscribe", { 
    transactionAddresses: ['all'],
    delegationAddresses: ['all'],
-   originationAddresses: ['all']
+   originationAddresses: ['all'],
+   fromBlockLevel: 744190,
+   blockHeaders: true
 });
 ```
 
 Note: `transactionAddresses`, `delegationAddresses` and `originationAdresses` are `string[]`.
+
+{% hint style="warning" %}
+If your client missed some blocks and you want to continue where you left off, you can optionally specify **fromBlockLevel** parameter. This will first send all the subscribed information from the blocks starting at the specified block level.
+{% endhint %}
 
 {% hint style="info" %}
 * Specifying **'all'** will subscribe the client to all transactions/delegations/originations respectively.
