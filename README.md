@@ -10,9 +10,9 @@ TaaS provides real-time updates to various applications based on the events happ
 
 ## Table of contents
 
-* [How to use](./#how-to-use)
-* [Solution description](./#solution-description)
-* [Sample Client Applications](./#sample-client-applications)
+* [How to use](#how-to-use)
+* [Solution description](#solution-description)
+* [Sample Client Applications](#sample-client-applications)
 
 ## How to use
 
