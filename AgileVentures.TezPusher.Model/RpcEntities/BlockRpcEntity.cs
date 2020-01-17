@@ -117,11 +117,16 @@ namespace AgileVentures.TezPusher.Model.RpcEntities
         public string @delegate { get; set; }
         public BlockTransactionMetadata metadata { get; set; }
     }
+    public class OriginationScript
+    {
+        public object storage { get; set; }
+    }
 
     public class BlockOriginationContent : BlockOperationContent, IRpcEntity
     {
         public string balance { get; set; }
         public BlockTransactionMetadata metadata { get; set; }
+        public OriginationScript script { get; set; }
     }
 
     public class BlockTransactionContent : BlockOperationContent, IRpcEntity
