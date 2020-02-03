@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { SignalRService, Block, Transaction } from './signalr.service';
+import { SignalRService, Block, Transaction, Origination, Delegation } from './signalr.service';
 import { MatTable } from '@angular/material';
 
 @Component({
@@ -10,17 +10,24 @@ import { MatTable } from '@angular/material';
 export class AppComponent implements OnInit, OnDestroy {
 
   private readonly _signalRService: SignalRService;
-  blocks: Block[];
-  transactions: Transaction[];
+  blocks: Block[] = [];
+  transactions: Transaction[] = [];
+  originations: Origination[] = [];
+  delegations: Delegation[] = [];
   displayedColumnsTableBlocks: string[] = ['level', 'hash', 'timestamp', 'validation_pass'];
   displayedColumnsTableTransaction: string[] = ['source', 'destination', 'amount', 'timestamp', 'level'];
+  displayedColumnsTableOrigination: string[] = ['source', 'originated', 'fee', 'timestamp', 'level'];
+  displayedColumnsTableDelegation: string[] = ['source', 'delegate', 'fee', 'timestamp', 'level'];
+
 
   constructor(signalRService: SignalRService) {
     this._signalRService = signalRService;
   }
 
-  @ViewChild('tableBlocks') tableBlocks: MatTable<Block>;
-  @ViewChild('tableTransactions') tableTransactions: MatTable<Transaction>;
+  @ViewChild('tableBlocks', {static: false}) tableBlocks: MatTable<Block>;
+  @ViewChild('tableTransactions', {static: false}) tableTransactions: MatTable<Transaction>;
+  @ViewChild('tableOriginations', {static: false}) tableOriginations: MatTable<Origination>;
+  @ViewChild('tableDelegations', {static: false}) tableDelegations: MatTable<Delegation>;
 
   ngOnInit() {
     this.blocks = [];
@@ -35,6 +42,16 @@ export class AppComponent implements OnInit, OnDestroy {
     this._signalRService.transactions.subscribe(transaction => {
       this.transactions.unshift(transaction);
       this.tableTransactions.renderRows();
+    });
+
+    this._signalRService.originations.subscribe(origination => {
+      this.originations.unshift(origination);
+      this.tableOriginations.renderRows();
+    });
+
+    this._signalRService.delegations.subscribe(delegation => {
+      this.delegations.unshift(delegation);
+      this.tableDelegations.renderRows();
     });
   }
 

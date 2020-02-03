@@ -19,14 +19,14 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   displayedColumnsTableOrigination: string[] = ['source', 'originated', 'fee', 'timestamp', 'level'];
   displayedColumnsTableDelegation: string[] = ['source', 'delegate', 'fee', 'timestamp', 'level'];
 
-  defaultEndpointUrl = 'https://taas-staging.agile-ventures.com/api/';
+  defaultEndpointUrl = 'https://taas-staging.tezoslive.io/api/';
 
   constructor(private signalRService: SignalRService, private dialog: MatDialog, private cdr: ChangeDetectorRef) { }
 
-  @ViewChild('tableBlocks') tableBlocks: MatTable<Block>;
-  @ViewChild('tableTransactions') tableTransactions: MatTable<Transaction>;
-  @ViewChild('tableOriginations') tableOriginations: MatTable<Origination>;
-  @ViewChild('tableDelegations') tableDelegations: MatTable<Delegation>;
+  @ViewChild('tableBlocks', {static: false}) tableBlocks: MatTable<Block>;
+  @ViewChild('tableTransactions', {static: false}) tableTransactions: MatTable<Transaction>;
+  @ViewChild('tableOriginations', {static: false}) tableOriginations: MatTable<Origination>;
+  @ViewChild('tableDelegations', {static: false}) tableDelegations: MatTable<Delegation>;
 
   ngAfterViewInit() {
     const dialogConfig = new MatDialogConfig();
