@@ -183,7 +183,9 @@ namespace AgileVentures.TezPusher.Model.RpcEntities
                         balance_updates = ior.result.balance_updates,
                         consumed_gas = ior.result.consumed_gas
                     }
-                }
+                },
+                // Hotfix for Globacap - use parameters from the parent call
+                parameters = parameters
             };
             return internalTxContent;
         }
