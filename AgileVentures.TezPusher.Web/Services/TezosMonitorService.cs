@@ -35,15 +35,14 @@ namespace AgileVentures.TezPusher.Web.Services
         public async Task StartAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Tezos Monitor Service is starting.");
-
             var nodeMonitorUrl = string.Format(TezosMonitorUriTemplate, _tezosConfig.NodeUrl);
-            var request = new HttpRequestMessage(HttpMethod.Get, nodeMonitorUrl);
             HttpResponseMessage result;
             while (!cancellationToken.IsCancellationRequested)
             {
                 try
                 {
-                    result = await _tezosMonitorClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, CancellationToken.None);
+                    var request = new HttpRequestMessage(HttpMethod.Get, nodeMonitorUrl);
+                    result = await _tezosMonitorClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
 
                     var stream = await result.Content.ReadAsStreamAsync();
                     var sr = new StreamReader(stream);
@@ -82,6 +81,7 @@ namespace AgileVentures.TezPusher.Web.Services
                 catch (Exception e)
                 {
                     _logger.LogCritical(e, $"Error during connection with Tezos Node at {nodeMonitorUrl}. Reconnecting ...");
+                    Thread.Sleep(5000);
                 }
             }
         }
