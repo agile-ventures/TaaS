@@ -21,6 +21,7 @@ namespace AgileVentures.TezPusher.Web.Services
         private readonly IPushService _pushService;
         private readonly TezosConfig _tezosConfig;
         private const string TezosMonitorUriTemplate = "{0}/monitor/heads/main";
+        private long _lastProcessedLevel = 0;
 
         public TezosMonitorService(
             ILogger<TezosMonitorService> logger, TezosMonitorClient client, IOptions<TezosConfig> tezosConfig, IPushService pushService)
@@ -38,39 +39,49 @@ namespace AgileVentures.TezPusher.Web.Services
             var nodeMonitorUrl = string.Format(TezosMonitorUriTemplate, _tezosConfig.NodeUrl);
             var request = new HttpRequestMessage(HttpMethod.Get, nodeMonitorUrl);
             HttpResponseMessage result;
-            try
-            {
-                result = await _tezosMonitorClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, CancellationToken.None);
-            }
-            catch (Exception e)
-            {
-                _logger.LogCritical(e, $"Cannot connect to Tezos Node at {nodeMonitorUrl}");
-                throw;
-            }
-            
-            var stream = await result.Content.ReadAsStreamAsync();
-            var sr = new StreamReader(stream);
-            string line;
-
-            while ((line = sr.ReadLine()) != null)
+            while (!cancellationToken.IsCancellationRequested)
             {
                 try
                 {
-                    var head = JsonConvert.DeserializeObject<MonitorHeadModel>(line);
+                    result = await _tezosMonitorClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, CancellationToken.None);
 
-                    var blockString = await _tezosMonitorClient.GetStringAsync(GetBlockUrl(head.hash));
+                    var stream = await result.Content.ReadAsStreamAsync();
+                    var sr = new StreamReader(stream);
+                    string line;
 
-                    var block = JsonConvert.DeserializeObject<BlockRpcEntity>(blockString);
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        try
+                        {
+                            var head = JsonConvert.DeserializeObject<MonitorHeadModel>(line);
+                            if (head.level > _lastProcessedLevel)
+                            {
+                                var blockString = await _tezosMonitorClient.GetStringAsync(GetBlockUrl(head.hash));
 
-                    await _pushService.PushBlockHeader(new HeadModel(block));
-                    await _pushService.PushOperations(block);
+                                var block = JsonConvert.DeserializeObject<BlockRpcEntity>(blockString);
 
-                    _logger.LogInformation($"Block {head.level} has been sent to clients.");
-                    _logger.LogTrace(line);
+                                await _pushService.PushBlockHeader(new HeadModel(block));
+                                await _pushService.PushOperations(block);
+
+                                _lastProcessedLevel = head.level;
+                                _logger.LogInformation($"Block {head.level} has been sent to clients.");
+                                _logger.LogTrace(line);
+                            }
+                            else
+                            {
+                                _logger.LogInformation($"Block {head.level} has been already processed.");
+                            }
+
+                        }
+                        catch (Exception ex)
+                        {
+                            _logger.LogError(ex, $"Failed to send the block to clients.");
+                        }
+                    }
                 }
-                catch (Exception ex)
+                catch (Exception e)
                 {
-                    _logger.LogError(ex, $"Failed to send the block to clients.");
+                    _logger.LogCritical(e, $"Error during connection with Tezos Node at {nodeMonitorUrl}. Reconnecting ...");
                 }
             }
         }
