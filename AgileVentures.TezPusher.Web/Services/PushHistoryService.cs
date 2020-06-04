@@ -43,25 +43,28 @@ namespace AgileVentures.TezPusher.Web.Services
             BlockRpcEntity model,
             BlockOperations operations)
         {
-            foreach (var transaction in operations.Transactions)
+            if (subscribeModel.TransactionAddresses != null && subscribeModel.TransactionAddresses.Any())
             {
-                var content = transaction.contents.Where(c =>
-                    c.kind == TezosBlockOperationConstants.Transaction && c.metadata.operation_result.status ==
-                    TezosBlockOperationConstants.OperationResultStatusApplied).ToList();
-                foreach (var transactionContent in content)
+                foreach (var transaction in operations.Transactions)
                 {
-                    // Babylon upgrade - KT1 transactions are smart contract operations
-                    var txSource = transactionContent.GetTransactionSource();
-                    var txDestination = transactionContent.GetTransactionDestination();
-                    var txContent = transactionContent.GetInternalTransactionContent();
-                    if (subscribeModel.TransactionAddresses.Contains("all") ||
-                        subscribeModel.TransactionAddresses.Contains(txSource) ||
-                        subscribeModel.TransactionAddresses.Contains(txDestination))
+                    var content = transaction.contents.Where(c =>
+                        c.kind == TezosBlockOperationConstants.Transaction && c.metadata.operation_result.status ==
+                        TezosBlockOperationConstants.OperationResultStatusApplied).ToList();
+                    foreach (var transactionContent in content)
                     {
-                        var message = new PushMessage(new TransactionModel(model, transaction, txContent));
-                        await clientsCaller.SendAsync("transactions", message);
-                        _log.LogDebug($"History Block {model.header.level} | " +
-                                      $"Operation hash {transaction.hash} has been sent. TxSource={txSource}, TxDestination={txDestination}");
+                        // Babylon upgrade - KT1 transactions are smart contract operations
+                        var txSource = transactionContent.GetTransactionSource();
+                        var txDestination = transactionContent.GetTransactionDestination();
+                        var txContent = transactionContent.GetInternalTransactionContent();
+                        if (subscribeModel.TransactionAddresses.Contains("all") ||
+                            subscribeModel.TransactionAddresses.Contains(txSource) ||
+                            subscribeModel.TransactionAddresses.Contains(txDestination))
+                        {
+                            var message = new PushMessage(new TransactionModel(model, transaction, txContent));
+                            await clientsCaller.SendAsync("transactions", message);
+                            _log.LogDebug($"History Block {model.header.level} | " +
+                                          $"Operation hash {transaction.hash} has been sent. TxSource={txSource}, TxDestination={txDestination}");
+                        }
                     }
                 }
             }
@@ -70,22 +73,25 @@ namespace AgileVentures.TezPusher.Web.Services
         private async Task PushDelegations(IClientProxy clientsCaller, SubscribeModel subscribeModel,
             BlockRpcEntity model, BlockOperations operations)
         {
-            foreach (var delegation in operations.Delegations)
+            if (subscribeModel.DelegationAddresses != null && subscribeModel.DelegationAddresses.Any())
             {
-                var content = delegation.contents.Where(c =>
-                    c.kind == TezosBlockOperationConstants.Delegation && c.metadata.operation_result.status ==
-                    TezosBlockOperationConstants.OperationResultStatusApplied).ToList();
-                foreach (var delegationContent in content)
+                foreach (var delegation in operations.Delegations)
                 {
-                    if (subscribeModel.DelegationAddresses.Contains("all") ||
-                        subscribeModel.DelegationAddresses.Contains(delegationContent.source) ||
-                        subscribeModel.DelegationAddresses.Contains(delegationContent.@delegate))
+                    var content = delegation.contents.Where(c =>
+                        c.kind == TezosBlockOperationConstants.Delegation && c.metadata.operation_result.status ==
+                        TezosBlockOperationConstants.OperationResultStatusApplied).ToList();
+                    foreach (var delegationContent in content)
                     {
-                        var message = new PushMessage(new DelegationModel(model, delegation, delegationContent));
-                        await clientsCaller.SendAsync("delegations", message);
+                        if (subscribeModel.DelegationAddresses.Contains("all") ||
+                            subscribeModel.DelegationAddresses.Contains(delegationContent.source) ||
+                            subscribeModel.DelegationAddresses.Contains(delegationContent.@delegate))
+                        {
+                            var message = new PushMessage(new DelegationModel(model, delegation, delegationContent));
+                            await clientsCaller.SendAsync("delegations", message);
 
-                        _log.LogDebug($"History block {model.header.level} | " +
-                                      $"Operation hash {delegation.hash} has been sent. DelegationSource={delegationContent.source}, DelegationDestination={delegationContent.@delegate}");
+                            _log.LogDebug($"History block {model.header.level} | " +
+                                          $"Operation hash {delegation.hash} has been sent. DelegationSource={delegationContent.source}, DelegationDestination={delegationContent.@delegate}");
+                        }
                     }
                 }
             }
@@ -95,21 +101,24 @@ namespace AgileVentures.TezPusher.Web.Services
             BlockRpcEntity model,
             BlockOperations operations)
         {
-            foreach (var originations in operations.Originations)
+            if (subscribeModel.OriginationAddresses != null && subscribeModel.OriginationAddresses.Any())
             {
-                var content = originations.contents.Where(c =>
-                    c.kind == TezosBlockOperationConstants.Origination && c.metadata.operation_result.status ==
-                    TezosBlockOperationConstants.OperationResultStatusApplied).ToList();
-                foreach (var originationContent in content)
+                foreach (var originations in operations.Originations)
                 {
-                    if (subscribeModel.OriginationAddresses.Contains("all") ||
-                        subscribeModel.OriginationAddresses.Contains(originationContent.source))
+                    var content = originations.contents.Where(c =>
+                        c.kind == TezosBlockOperationConstants.Origination && c.metadata.operation_result.status ==
+                        TezosBlockOperationConstants.OperationResultStatusApplied).ToList();
+                    foreach (var originationContent in content)
                     {
-                        var message = new PushMessage(new OriginationModel(model, originations, originationContent));
-                        await clientsCaller.SendAsync("originations", message);
+                        if (subscribeModel.OriginationAddresses.Contains("all") ||
+                            subscribeModel.OriginationAddresses.Contains(originationContent.source))
+                        {
+                            var message = new PushMessage(new OriginationModel(model, originations, originationContent));
+                            await clientsCaller.SendAsync("originations", message);
 
-                        _log.LogDebug($"History block {model.header.level} | " +
-                                      $"Operation hash {originations.hash} has been sent. OriginationSource={originationContent.source}");
+                            _log.LogDebug($"History block {model.header.level} | " +
+                                          $"Operation hash {originations.hash} has been sent. OriginationSource={originationContent.source}");
+                        }
                     }
                 }
             }

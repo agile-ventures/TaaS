@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AgileVentures.TezPusher.Model.PushEntities;
 using AgileVentures.TezPusher.Web.Services;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Logging;
 
 namespace AgileVentures.TezPusher.Web.Hubs
@@ -30,32 +31,38 @@ namespace AgileVentures.TezPusher.Web.Hubs
                 await _tezosHistoryService.ProcessHistoryAsync(Clients.Caller, Context.ConnectionId, model);
             }
 
-            if (model.BlockHeaders)
+            if (model.BlockHeaders.HasValue && model.BlockHeaders.Value)
             {
                 await Groups.AddToGroupAsync(Context.ConnectionId, "block_headers");
             }
 
-            foreach (var address in model.TransactionAddresses)
+            if (model.TransactionAddresses != null && model.TransactionAddresses.Any())
             {
-                await Groups.AddToGroupAsync(Context.ConnectionId, $"transactions_{address}");
+                foreach (var address in model.TransactionAddresses)
+                {
+                    await Groups.AddToGroupAsync(Context.ConnectionId, $"transactions_{address}");
+                }
             }
 
-            foreach (var address in model.OriginationAddresses)
+            if (model.OriginationAddresses != null && model.OriginationAddresses.Any())
             {
-                await Groups.AddToGroupAsync(Context.ConnectionId, $"originations_{address}");
+                foreach (var address in model.OriginationAddresses)
+                {
+                    await Groups.AddToGroupAsync(Context.ConnectionId, $"originations_{address}");
+                }
             }
 
-            foreach (var address in model.DelegationAddresses)
+            if (model.DelegationAddresses != null && model.DelegationAddresses.Any())
             {
-                await Groups.AddToGroupAsync(Context.ConnectionId, $"delegations_{address}");
+                foreach (var address in model.DelegationAddresses)
+                {
+                    await Groups.AddToGroupAsync(Context.ConnectionId, $"delegations_{address}");
+                }
             }
+
             await Clients.Caller.SendAsync("subscribed",new object[] { model });
-
-            if (model.FromBlockLevel != null)
-            {
-
-            }
         }
+
         public async Task Unsubscribe(SubscribeModel model)
         {
             foreach (var address in model.TransactionAddresses)

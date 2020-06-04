@@ -21,6 +21,6 @@ namespace AgileVentures.TezPusher.Model.PushEntities
         public ulong? FromBlockLevel { get; set; }
 
         [JsonProperty(PropertyName = "blockHeaders", NullValueHandling = NullValueHandling.Ignore)]
-        public bool BlockHeaders { get; set; }
+        public bool? BlockHeaders { get; set; }
     }
 }
