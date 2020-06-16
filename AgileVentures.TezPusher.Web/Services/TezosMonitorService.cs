@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 
 namespace AgileVentures.TezPusher.Web.Services
 {
-    public class TezosMonitorService : IHostedService
+    public class TezosMonitorService : BackgroundService
     {
         private readonly ILogger _logger;
         private readonly HttpClient _tezosMonitorClient;
@@ -32,7 +32,7 @@ namespace AgileVentures.TezPusher.Web.Services
             _tezosConfig = tezosConfig.Value;
         }
 
-        public async Task StartAsync(CancellationToken cancellationToken)
+        protected override async Task ExecuteAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Tezos Monitor Service is starting.");
             var nodeMonitorUrl = string.Format(TezosMonitorUriTemplate, _tezosConfig.NodeUrl);
@@ -48,7 +48,7 @@ namespace AgileVentures.TezPusher.Web.Services
                     var sr = new StreamReader(stream);
                     string line;
 
-                    while ((line = sr.ReadLine()) != null)
+                    while ((line = await sr.ReadLineAsync()) != null && !cancellationToken.IsCancellationRequested)
                     {
                         try
                         {
@@ -84,12 +84,6 @@ namespace AgileVentures.TezPusher.Web.Services
                     Thread.Sleep(5000);
                 }
             }
-        }
-
-        public Task StopAsync(CancellationToken cancellationToken)
-        {
-            _logger.LogInformation("Tezos Monitor Service is stopping.");
-            return Task.CompletedTask;
         }
 
         private string GetBlockUrl(string hash)
